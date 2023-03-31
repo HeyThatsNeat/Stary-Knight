@@ -8,19 +8,21 @@ let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMen
 //depend on enemy obj. and how to reset them when you lose
 
 /*------------------------ Cached Element References ------------------------*/
-const startMenu = document.createElement("img")
-const startButton = document.createElement("button")
-startButton.className = "start-button"
-startButton.innerText = "Start Game!"
-
+const createStartMenuImg = document.createElement("img")
+createStartMenuImg.className = "start-img"
+const createStartButtonEl = document.createElement("button")
+createStartButtonEl.className = "start-button"
+createStartButtonEl.innerText = "Start Game!"
+const startScreenEl = document.querySelector(".start-screen")
+const firstMessageScreenEl = document.querySelector(".first-message")
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+firstMessageScreenEl.addEventListener("click", disableFirstMessageScreen)
 
 /*-------------------------------- Functions --------------------------------*/
 
 function init() {
-    startGameMenu();
+    // startGameMenu();
     gameLevel = 1;
     win = false;
     playerHP = 100;
@@ -68,10 +70,15 @@ init()
 //     }
 // }  
 
+function disableFirstMessageScreen() {
+firstMessageScreenEl.remove()
+startGameMenu()
+}
+
 function startGameMenu() {
-    startMenu.src=""
-    document.body.appendChild(startMenu)
-    document.body.appendChild(startButton)
+    createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
+    startScreenEl.append(createStartMenuImg)
+    startScreenEl.append(createStartButtonEl)
 }
 
 //   level3Render() //to be implemented

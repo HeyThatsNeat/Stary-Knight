@@ -1,6 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 
 /* START SCREEN */
+.start-screen {
+    position:fixed;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: calc(100vh - 8em);
+    padding: 4em;
+    color: rgba(251, 253, 255, 0.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #1a46a6;
+}
+
+.start-img {
+    max-width: 100%;
+}
+
+
+/* AFTER START SCREEN MESSAGE
+https://css-tricks.com/snippets/css/typewriter-effect/     How I got the typewriter CSS
+*/
 
 .first-message {
     position:fixed;
@@ -71,3 +92,5 @@ html{
     from{border-right-color: #191919;}
     to{border-right-color: transparent;}
 }
+
+
