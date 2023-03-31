@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* START SCREEN */
+
+.first-message {
+    position:fixed;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: calc(100vh - 8em);
+    padding: 4em;
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #191919;
+}
+/* Global */
+html{
+    min-height: 100%;
+    overflow: hidden;
+}
+.line-1{
+    position: relative;
+    top: 50%;  
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid #191919;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+.line-2{
+    position: relative;
+    top: 50%;  
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid #191919;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+}
+
+/* Animation */
+.anim-typewriter{
+    animation: typewriter 4s steps(44) 1s 1 normal both,
+    blinkTextCursor 0ms steps(44) infinite normal;
+}
+
+@keyframes typewriter {
+    from{width: 0;}
+    to{width: 24em;}
+}
+
+.anim-typewriter2{
+    animation: typewriter 4s steps(44) 4s 1 normal both,
+    blinkTextCursor 0ms steps(44) infinite normal;
+}
+
+@keyframes typewriter2{
+    from{width: 0;}
+    to{width: 24em;}
+}
+
+
+@keyframes blinkTextCursor{
+    from{border-right-color: #191919;}
+    to{border-right-color: transparent;}
+}
