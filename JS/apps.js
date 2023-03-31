@@ -15,6 +15,9 @@ createStartButtonEl.className = "start-button"
 createStartButtonEl.innerText = "Start Game!"
 const startScreenEl = document.querySelector(".start-screen")
 const firstMessageScreenEl = document.querySelector(".first-message")
+const menuTitleEl = document.createElement("h1")
+menuTitleEl.className = "menu-title"
+menuTitleEl.innerText = "Starry Knight"
 /*----------------------------- Event Listeners -----------------------------*/
 
 firstMessageScreenEl.addEventListener("click", disableFirstMessageScreen)
@@ -79,6 +82,7 @@ function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
     startScreenEl.append(createStartButtonEl)
+    startScreenEl.append(menuTitleEl)
 }
 
 //   level3Render() //to be implemented
