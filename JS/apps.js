@@ -22,6 +22,8 @@ const menuTitleEl = document.createElement("h1")
 menuTitleEl.className = "menu-title"
 menuTitleEl.innerText = "Starry Knight"
 const createFirstBattleImg = document.createElement("img")
+const createKnightImg = document.createElement("img")
+createKnightImg.className = "knight"
 const battleScreenEl = document.querySelector(".battle-screen")
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -77,33 +79,32 @@ init()
 //     }
 // }  
 
-
-function disableMainScreen(evnt) {
-    // menuTitleEl.remove()
-    // createStartButtonEl.remove()
-    // createStartMenuImg.remove()
-    startScreenEl.remove()
-    evnt.stopPropagation()
-    firstMessageScreenEl.classList.add('play-animation')
-    firstMessageScreenEl.append(createContinueButtonEl)
-    setTimeout(() => {
-        createContinueButtonEl.style.visibility = 'visible';
-    }, 7500);
-    createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
-    battleScreenEl.append(createFirstBattleImg)
-}
-
-function disableFirstMessageScreen(evnt) {
-    firstMessageScreenEl.remove()
-    evnt.stopPropagation()
-}
-
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
     startScreenEl.append(createStartButtonEl)
     startScreenEl.append(menuTitleEl)
 }
+
+function disableMainScreen(evnt) {
+    startScreenEl.remove()
+    firstMessageScreenEl.classList.add('play-animation')
+    firstMessageScreenEl.append(createContinueButtonEl)
+    setTimeout(() => {
+        createContinueButtonEl.style.visibility = 'visible';
+    }, 7500);
+    evnt.stopPropagation()
+}
+
+function disableFirstMessageScreen(evnt) {
+    firstMessageScreenEl.remove()
+    createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
+    battleScreenEl.append(createFirstBattleImg)
+    createKnightImg.src="../css/knight-for-project-flipped.png"
+    battleScreenEl.append(createKnightImg)
+    evnt.stopPropagation()
+}
+
 
 //   level3Render() //to be implemented
   

@@ -93,7 +93,7 @@ html{
     background-color: #191919;
     display: flex;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
 }
 
 
@@ -165,4 +165,13 @@ html{
     color: rgba(205, 73, 36, 0.75);
     font-family: 'Anonymous Pro', monospace;  
     background-color: #1a46a6;
+}
+
+.knight {
+    position: fixed;
+    margin:0;
+    top: 55vmin;;
+    left: 65vmin;
+    width: 10%;
+    padding: 0;
 }
