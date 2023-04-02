@@ -175,3 +175,12 @@ html{
     width: 10%;
     padding: 0;
 }
+
+.golem {
+    position: fixed;
+    margin:0;
+    top: 55vmin;
+    left: 95vmin;
+    width: 10%;
+    padding: 0;
+}
