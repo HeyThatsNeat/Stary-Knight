@@ -13,6 +13,7 @@
     font-family: 'Anonymous Pro', monospace;  
     background-color: #1a46a6;
 }
+
 .start-button {
     position: absolute;
     top: 75%;
@@ -27,6 +28,7 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
 .menu-title {
     position: absolute;
     top: 20%;
@@ -36,38 +38,37 @@
     color: white;
     font-size: 110px;
 }
+
 .start-img {
     /* Set rules to fill background */
     min-height: 100%;
     min-width: 1024px;
-      
     /* Set up proportionate scaling */
     width: 100%;
     height: auto;
-      
     /* Set up positioning */
     position: fixed;
     top: 0;
     left: 0;
-  }
-  
-  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
     img.bg {
         left: 50%;
         margin-left: -512px;   /* 50% */
     }
-  }
-  
-  /* AFTER START SCREEN MESSAGE
-  https://css-tricks.com/snippets/css/typewriter-effect/     How I got the typewriter CSS
+}
+
+/* AFTER START SCREEN MESSAGE
+https://css-tricks.com/snippets/css/typewriter-effect/     How I got the typewriter CSS
 */
 
 html{
     min-height: 100%;
     overflow: hidden;
-  }
+}
 
-  .first-message{
+.first-message{
     height: calc(100vh - 8em);
     padding: 4em;
     color: rgba(249, 249, 249, 0.75);
@@ -76,23 +77,23 @@ html{
     display: flex;
     align-items: center;
     justify-content: center;  
-  }
+}
 
 
-  .line-1 {
-      position: fixed;
-      top: 50%;  
-      width: 24em;
-      margin: 0 auto;
-      border-right: 2px solid #191919;
-      font-size: 180%;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      transform: translateY(-50%);    
-  }
+.line-1 {
+    position: fixed;
+    top: 50%;  
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid #191919;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
 
-  .line-2{
+.line-2{
     position: fixed;
     top: 55%;  
     width: 24em;
@@ -106,29 +107,29 @@ html{
 }
 
   /* Animation */
-  .anim-typewriter {
+.anim-typewriter {
     animation: typewriter 4s steps(44) 1s 1 normal both,
-               blinkTextCursor 0ms steps(44) infinite normal;
-               animation-play-state: paused;
-  }
+    blinkTextCursor 0ms steps(44) infinite normal;
+    animation-play-state: paused;
+}
 
-  .anim-typewriter2{
+.anim-typewriter2{
     animation: typewriter 4s steps(44) 4.5s 1 normal both,
-               blinkTextCursor 0ms steps(44) infinite normal;
-               animation-play-state: paused;
-  }
+    blinkTextCursor 0ms steps(44) infinite normal;
+    animation-play-state: paused;
+}
 
 .play-animation .anim-typewriter,
 .play-animation .anim-typewriter2 {
     animation-play-state: running;
 }
 
-  @keyframes typewriter{
+@keyframes typewriter{
     from{width: 0;}
     to{width: 24em;}
-  }
+}
 
-  @keyframes blinkTextCursor{
+@keyframes blinkTextCursor{
     from{border-right-color: #191919;}
     to{border-right-color: transparent;}
-  }
+}
