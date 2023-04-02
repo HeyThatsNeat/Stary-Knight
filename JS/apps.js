@@ -21,6 +21,8 @@ const firstMessageScreenEl = document.querySelector(".first-message")
 const menuTitleEl = document.createElement("h1")
 menuTitleEl.className = "menu-title"
 menuTitleEl.innerText = "Starry Knight"
+const createFirstBattleImg = document.createElement("img")
+const battleScreenEl = document.querySelector(".battle-screen")
 /*----------------------------- Event Listeners -----------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
@@ -86,10 +88,9 @@ function disableMainScreen(evnt) {
     firstMessageScreenEl.append(createContinueButtonEl)
     setTimeout(() => {
         createContinueButtonEl.style.visibility = 'visible';
-      
-        // 👇️ if you used `display` to hide the element
-        // el.style.display = 'block';
-      }, 7500);
+    }, 7500);
+    createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
+    battleScreenEl.append(createFirstBattleImg)
 }
 
 function disableFirstMessageScreen(evnt) {
