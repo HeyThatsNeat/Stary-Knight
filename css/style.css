@@ -68,7 +68,24 @@ html{
     overflow: hidden;
 }
 
+.continue-button{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
 .first-message{
+    max-width: 100%;
     height: calc(100vh - 8em);
     padding: 4em;
     color: rgba(249, 249, 249, 0.75);
@@ -132,4 +149,20 @@ html{
 @keyframes blinkTextCursor{
     from{border-right-color: #191919;}
     to{border-right-color: transparent;}
+}
+
+
+/* BATTLE SCREEN */
+
+.battle-screen {
+    position:fixed;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: calc(100vh - 8em);
+    padding: 0;
+    color: rgba(205, 73, 36, 0.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #1a46a6;
 }

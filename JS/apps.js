@@ -5,7 +5,7 @@
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
-//depend on enemy obj. and how to reset them when you lose
+
 
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
@@ -13,6 +13,9 @@ createStartMenuImg.className = "start-img"
 const createStartButtonEl = document.createElement("button")
 createStartButtonEl.className = "start-button"
 createStartButtonEl.innerText = "Start Game!"
+const createContinueButtonEl = document.createElement("button")
+createContinueButtonEl.className = "continue-button"
+createContinueButtonEl.innerText = "Continue"
 const startScreenEl = document.querySelector(".start-screen")
 const firstMessageScreenEl = document.querySelector(".first-message")
 const menuTitleEl = document.createElement("h1")
@@ -20,9 +23,8 @@ menuTitleEl.className = "menu-title"
 menuTitleEl.innerText = "Starry Knight"
 /*----------------------------- Event Listeners -----------------------------*/
 
-firstMessageScreenEl.addEventListener("click", disableFirstMessageScreen)
+createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
-
 /*-------------------------------- Functions --------------------------------*/
 function init() {
     startGameMenu();
@@ -75,12 +77,19 @@ init()
 
 
 function disableMainScreen(evnt) {
-    menuTitleEl.remove()
-    createStartButtonEl.remove()
-    createStartMenuImg.remove()
+    // menuTitleEl.remove()
+    // createStartButtonEl.remove()
+    // createStartMenuImg.remove()
     startScreenEl.remove()
     evnt.stopPropagation()
     firstMessageScreenEl.classList.add('play-animation')
+    firstMessageScreenEl.append(createContinueButtonEl)
+    setTimeout(() => {
+        createContinueButtonEl.style.visibility = 'visible';
+      
+        // 👇️ if you used `display` to hide the element
+        // el.style.display = 'block';
+      }, 7500);
 }
 
 function disableFirstMessageScreen(evnt) {
