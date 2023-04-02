@@ -21,11 +21,11 @@ menuTitleEl.innerText = "Starry Knight"
 /*----------------------------- Event Listeners -----------------------------*/
 
 firstMessageScreenEl.addEventListener("click", disableFirstMessageScreen)
+createStartButtonEl.addEventListener("click", disableMainScreen)
 
 /*-------------------------------- Functions --------------------------------*/
-
 function init() {
-    // startGameMenu();
+    startGameMenu();
     gameLevel = 1;
     win = false;
     playerHP = 100;
@@ -73,9 +73,19 @@ init()
 //     }
 // }  
 
-function disableFirstMessageScreen() {
-firstMessageScreenEl.remove()
-startGameMenu()
+
+function disableMainScreen(evnt) {
+    menuTitleEl.remove()
+    createStartButtonEl.remove()
+    createStartMenuImg.remove()
+    startScreenEl.remove()
+    evnt.stopPropagation()
+    firstMessageScreenEl.classList.add('play-animation')
+}
+
+function disableFirstMessageScreen(evnt) {
+    firstMessageScreenEl.remove()
+    evnt.stopPropagation()
 }
 
 function startGameMenu() {
