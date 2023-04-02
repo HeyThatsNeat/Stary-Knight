@@ -45,6 +45,10 @@ const battleScreenEl = document.querySelector(".battle-screen")
 
 const stoneGolemGif = document.createElement("img")
 stoneGolemGif.className = "golem"
+
+const fightButtonEl = document.createElement("button")
+fightButtonEl.className = "fight-button"
+fightButtonEl.innerText = "Fight"
 /*----------------------------- Event Listeners ------------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
@@ -74,40 +78,40 @@ init()
 
 
 
-render() {
-    fight()
-    playerChoice()
-    computerChoice()
-    dmgCalculations()
-    updateCombatLog()
-    updateHp()
-    checkIfWin() {
-        if (win) {
-            updateStars()
-            winStatusMessage/effects()
+// render() {
+//     fight()
+//     playerChoice()
+//     computerChoice()
+//     dmgCalculations()
+//     updateCombatLog()
+//     updateHp()
+//     checkIfWin() {
+//         if (win) {
+//             updateStars()
+//             winStatusMessage/effects()
             
             
-            //then onclick
-            menusInbetweenFights() {
-                fight()
-            }
-        }
-    updateTurn()
-    }
-}
+//             //then onclick
+//             menusInbetweenFights() {
+//                 fight()
+//             }
+//         }
+//     updateTurn()
+//     }
+// }
                 
-function fight() {
-    gameLevel = updateGameLevel()
-    win = false
-    playerHP = 100
-    computerHp = 100
-    combatLog = empty
-    turn = 1   //maybe random later
-    startFight = true
-    actionMenu = true
-    stars = updateStars()
+// function fight() {
+//     gameLevel = updateGameLevel()
+//     win = false
+//     playerHP = 100
+//     computerHp = 100
+//     combatLog = empty
+//     turn = 1   //maybe random later
+//     startFight = true
+//     actionMenu = true
+//     stars = updateStars()
+// }
 
-}
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
@@ -133,6 +137,7 @@ function disableFirstMessageScreen(evnt) {
     battleScreenEl.append(createKnightImg)
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
+    battleScreenEl.append(fightButtonEl)
     evnt.stopPropagation()
 }
 

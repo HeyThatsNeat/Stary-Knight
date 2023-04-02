@@ -180,7 +180,22 @@ html{
     position: fixed;
     margin:0;
     top: 55vmin;
-    left: 95vmin;
+    left: 130vmin;
     width: 10%;
     padding: 0;
+}
+
+.fight-button {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
