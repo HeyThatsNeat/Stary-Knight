@@ -8,6 +8,7 @@ const enemies = [
     {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
 ]
 
+const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -59,6 +60,8 @@ const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
 fightButtonEl.innerText = "Fight"
 let playerCurrentStars = 0
+
+//need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
@@ -119,13 +122,13 @@ init()
 // }
 
 function computerChoice() {
-    console.log(player.dmg -= currentEnemy.dmg)
+    return player.dmg -= currentEnemy.dmg
     // console.log(setTimeout(computerChoice, 4000))
 }
 
 function playerChoice() {
-    console.log(currentEnemy.hp -= player.dmg)
-}console.log(currentEnemy.hp)
+    return currentEnemy.hp -= player.dmg
+}
 
 function damage(num) {
     return Math.floor(Math.random() * num)
@@ -155,6 +158,7 @@ function switchCharacterTurns() {
 
 function aliveStatus() {
     if (currentEnemy.hp <= 0) {
+        console.log(`${currentEnemy} is dead!!!`)
         return currentEnemy.alive = false
     }
     if (player.hp <= 0) {
@@ -203,6 +207,8 @@ function disableFirstMessageScreen(evnt) {
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
     battleScreenEl.append(fightButtonEl)
+    firstBattleMusic.volume = 0.05;
+    firstBattleMusic.play()
     evnt.stopPropagation()
 }
 
