@@ -1,6 +1,12 @@
 /*-------------------------------- Constants --------------------------------*/
 
-
+const enemies = [
+    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: false}, 
+    {name: "enemy2", hp: 100, turn: -1, dmg: damage(7), stars: 2, alive: true}, 
+    {name: "enemy3", hp: 100, turn: -1, dmg: damage(8), stars: 3, alive: true}, 
+    {name: "enemy4", hp: 100, turn: -1, dmg: damage(9), stars: 4, alive: true}, 
+    {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -49,18 +55,17 @@ stoneGolemGif.className = "golem"
 const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
 fightButtonEl.innerText = "Fight"
+let playerCurrentStars = 0
 /*----------------------------- Event Listeners ------------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 /*-------------------------------- Objects -----------------------------------*/
-let player = {hp: 100, turn: 1, stars: 0}
+let player = {hp: 100, turn: 1, get dmg() {
+    return knightBaseDmg() + this.stars
+}, stars: knightStars()}
+console.log(player.dmg)
 
-let enemy1 = {hp: 100, turn: -1, stars: 10}
-let enemy2 = {hp: 100, turn: -1, stars: 20}
-let enemy3 = {hp: 100, turn: -1, stars: 30}
-let enemy4 = {hp: 100, turn: -1, stars: 40}
-let enemy5 = {hp: 100, turn: -1, stars: 50}
 /*-------------------------------- Functions ---------------------------------*/
 function init() {
     startGameMenu();
@@ -111,6 +116,31 @@ init()
 //     actionMenu = true
 //     stars = updateStars()
 // }
+
+function damage(num) {
+    return Math.floor(Math.random() * num)
+}
+
+function knightBaseDmg() {
+    return 1 + Math.floor(Math.random() * 6)
+}
+
+console.log(enemies)
+console.log(enemies[0])
+
+function knightStars() {
+    for (let i = 0; i < enemies.length; i++) {
+    if (enemies[i].alive === false) {
+        playerCurrentStars += enemies[i].stars
+        enemies[i].stars = 0
+    }
+}
+return playerCurrentStars
+}
+player.stars = knightStars()
+console.log(enemies[0].stars)
+console.log(player.stars)
+console.log(knightStars())
 
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
