@@ -63,11 +63,11 @@ let playerCurrentStars = 0
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
+fightButtonEl.addEventListener("click", playerChoice)
 /*-------------------------------- Objects -----------------------------------*/
 let player = {hp: 100, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
 }, stars: knightStars()}
-console.log(player.dmg)
 
 /*-------------------------------- Functions ---------------------------------*/
 function init() {
@@ -119,10 +119,13 @@ init()
 // }
 
 function computerChoice() {
-    return currentEnemy.dmg
+    console.log(player.dmg -= currentEnemy.dmg)
+    // console.log(setTimeout(computerChoice, 4000))
 }
 
-console.log(setTimeout(computerChoice, 4000))
+function playerChoice() {
+    console.log(currentEnemy.hp -= player.dmg)
+}console.log(currentEnemy.hp)
 
 function damage(num) {
     return Math.floor(Math.random() * num)
