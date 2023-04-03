@@ -153,6 +153,20 @@ function switchCharacterTurns() {
     }
 }
 
+function aliveStatus() {
+    if (currentEnemy.hp <= 0) {
+        return currentEnemy.alive = false
+    }
+    if (player.hp <= 0) {
+        return gameOver()
+    }
+}
+
+function gameOver() {
+    // show a game over page or message 
+    // return back to the main menu
+}
+
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         return win = true
