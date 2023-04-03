@@ -1,9 +1,9 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: true}, 
-    {name: "enemy2", hp: 100, turn: -1, dmg: damage(7), stars: 2, alive: true}, 
-    {name: "enemy3", hp: 100, turn: -1, dmg: damage(8), stars: 3, alive: true}, 
+    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: false}, 
+    {name: "enemy2", hp: 100, turn: -1, dmg: damage(7), stars: 2, alive: false}, 
+    {name: "enemy3", hp: 100, turn: -1, dmg: damage(8), stars: 3, alive: false}, 
     {name: "enemy4", hp: 100, turn: -1, dmg: damage(9), stars: 4, alive: true}, 
     {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
 ]
@@ -140,6 +140,24 @@ function switchCharacterTurns() {
     } else {
         turn *= -1;
     }
+}
+
+let currentEnemy = enemies.find(function(enemy) {
+    return enemy.alive === true
+})
+currentEnemy.alive = false
+console.log(currentEnemy)
+
+function checkIfWin(){
+    if(currentEnemy.alive === false && currentEnemy.stars === 0) {
+        return win = true
+    }
+}
+
+console.log(checkIfWin())
+
+function resetWin() {
+    return win = false
 }
 
 function startGameMenu() {
