@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: false}, 
+    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: true}, 
     {name: "enemy2", hp: 100, turn: -1, dmg: damage(7), stars: 2, alive: true}, 
     {name: "enemy3", hp: 100, turn: -1, dmg: damage(8), stars: 3, alive: true}, 
     {name: "enemy4", hp: 100, turn: -1, dmg: damage(9), stars: 4, alive: true}, 
@@ -74,7 +74,7 @@ function init() {
     playerHP = 100;
     computerHp = 100;    //depend on enemy obj. and how to reset them when you lose
     combatLog = null;
-    turn = null;
+    turn = 1;
     startFight = false;
     actionMenu = false;
     stars = 0;
@@ -114,7 +114,6 @@ init()
 //     turn = 1   //maybe random later
 //     startFight = true
 //     actionMenu = true
-//     stars = updateStars()
 // }
 
 function damage(num) {
@@ -125,9 +124,6 @@ function knightBaseDmg() {
     return 1 + Math.floor(Math.random() * 6)
 }
 
-console.log(enemies)
-console.log(enemies[0])
-
 function knightStars() {
     for (let i = 0; i < enemies.length; i++) {
     if (enemies[i].alive === false) {
@@ -137,10 +133,14 @@ function knightStars() {
 }
 return playerCurrentStars
 }
-player.stars = knightStars()
-console.log(enemies[0].stars)
-console.log(player.stars)
-console.log(knightStars())
+
+function switchCharacterTurns() {
+    if (winner === true) {
+        return;
+    } else {
+        turn *= -1;
+    }
+}
 
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
