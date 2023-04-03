@@ -61,41 +61,46 @@ fightButtonEl.className = "fight-button"
 fightButtonEl.innerText = "Fight"
 let playerCurrentStars = 0
 
+const combatLogEl = document.createElement("div")
+combatLogEl.className = "combat-log"
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
-fightButtonEl.addEventListener("click", playerChoice)
+fightButtonEl.addEventListener("click", render)
 /*-------------------------------- Objects -----------------------------------*/
 let player = {hp: 100, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
-}, stars: knightStars()}
+}, stars: knightStars(), win: false}
 
 /*-------------------------------- Functions ---------------------------------*/
 function init() {
     startGameMenu();
-    gameLevel = 1;
     win = false;
-    playerHP = 100;
-    computerHp = 100;    //depend on enemy obj. and how to reset them when you lose
-    combatLog = null;
-    turn = 1;
-    startFight = false;
-    actionMenu = false;
-    stars = 0;
+    player.hp = 100
+    currentEnemy.hp = 100    //depend on enemy obj. and how to reset them when you lose
+    turn = 1
+    player.stars = 0;
 }
 init()
 
-
+function render() {
+    playerChoice()
+    // updateAfterPlayerCombatLog()
+    switchCharacterTurns()
+    aliveStatus()
+    enemyChoice()
+    // updateAfterEnemyCombatLog()
+    aliveStatus()
+    checkIfWin()
+}
 
 // render() {
 //     fight()
 //     playerChoice()
 //     computerChoice()
-//     dmgCalculations()
 //     updateCombatLog()
-//     updateHp()
 //     checkIfWin() {
 //         if (win) {
 //             updateStars()
@@ -121,23 +126,44 @@ init()
 //     actionMenu = true
 // }
 
-function computerChoice() {
-    return player.dmg -= currentEnemy.dmg
-    // console.log(setTimeout(computerChoice, 4000))
+function enemyChoice() {
+    setTimeout(function() {
+    if (turn === currentEnemy.turn){
+    player.hp -= currentEnemy.dmg
+    combatLogEl.innerText = `The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
+    return combatLogEl.innerText
+    }}, 2000)
 }
+
+console.log(currentEnemy)
 
 function playerChoice() {
-    return currentEnemy.hp -= player.dmg
+    if (turn === player.turn){
+    currentEnemy.hp -= player.dmg
+    combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.`
+    return combatLogEl.innerText
+    }
 }
 
+// function updateAfterPlayerCombatLog() {
+//     combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy} has ${currentEnemy.hp} left.`
+// }
+
+// function updateAfterEnemyCombatLog() {
+//     combatLogEl.innerText = `The ${currentEnemy} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
+// }
+
+// IN ENEMY OBJECTS
 function damage(num) {
     return Math.floor(Math.random() * num)
 }
 
+// IN PLAYER OBJECT
 function knightBaseDmg() {
     return 1 + Math.floor(Math.random() * 6)
 }
 
+// IN PLAYER OBJECT
 function knightStars() {
     for (let i = 0; i < enemies.length; i++) {
     if (enemies[i].alive === false) {
@@ -149,7 +175,7 @@ return playerCurrentStars
 }
 
 function switchCharacterTurns() {
-    if (winner === true) {
+    if (player.win === true) {
         return;
     } else {
         turn *= -1;
@@ -158,8 +184,9 @@ function switchCharacterTurns() {
 
 function aliveStatus() {
     if (currentEnemy.hp <= 0) {
-        console.log(`${currentEnemy} is dead!!!`)
-        return currentEnemy.alive = false
+        currentEnemy.alive = false
+        combatLogEl.innerText = `${currentEnemy} is dead!!!`
+        return combatLogEl.innerText
     }
     if (player.hp <= 0) {
         return gameOver()
@@ -169,6 +196,7 @@ function aliveStatus() {
 function gameOver() {
     // show a game over page or message 
     // return back to the main menu
+    init() ///// ???? maybe have that there
 }
 
 function checkIfWin(){
@@ -177,10 +205,11 @@ function checkIfWin(){
     }
 }
 
-function resetWin() {
-    return win = false
-}
+// function resetWin() {
+//     return win = false
+// }
 
+// HAPPENING ON CLICK
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
@@ -188,6 +217,8 @@ function startGameMenu() {
     startScreenEl.append(menuTitleEl)
 }
 
+
+// HAPPENING ON CLICK
 function disableMainScreen(evnt) {
     startScreenEl.remove()
     firstMessageScreenEl.classList.add('play-animation')
@@ -198,6 +229,7 @@ function disableMainScreen(evnt) {
     evnt.stopPropagation()
 }
 
+// HAPPENING ON CLICK
 function disableFirstMessageScreen(evnt) {
     firstMessageScreenEl.remove()
     createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
@@ -207,20 +239,12 @@ function disableFirstMessageScreen(evnt) {
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
     battleScreenEl.append(fightButtonEl)
-    firstBattleMusic.volume = 0.05;
+    firstBattleMusic.volume = 0.03
     firstBattleMusic.play()
+    firstBattleMusic.loop = true
+    battleScreenEl.append(combatLogEl)
     evnt.stopPropagation()
 }
 
 
 //   level3Render() //to be implemented
-  
-  
-//   **different folder**
-//   const enemies = [
-//   {enemy 1},
-//   {enemy 2},
-//   ....,
-//   {enemy 6},
-//   ]
-  
