@@ -84,6 +84,22 @@ html{
     visibility: hidden;
 }
 
+.skip-button {
+    position: absolute;
+    top: 115%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #ad3636;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    visibility: visible;
+}
+
 .first-message{
     max-width: 100%;
     height: calc(100vh - 8em);
@@ -198,6 +214,7 @@ html{
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    visibility: visible;
 }
 
 .combat-log {

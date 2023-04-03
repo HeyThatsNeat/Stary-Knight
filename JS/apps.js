@@ -17,6 +17,8 @@ let currentEnemy = enemies.find(function(enemy) {
     return enemy.alive === true || enemy.stars > 0
 })
 
+let playerCurrentStars = 0
+
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
 createStartMenuImg.className = "start-img"
@@ -59,7 +61,11 @@ stoneGolemGif.className = "golem"
 const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
 fightButtonEl.innerText = "Fight"
-let playerCurrentStars = 0
+
+const skipButtonEl = document.createElement("button")
+skipButtonEl.className = "skip-button"
+skipButtonEl.innerText = "Skip"
+
 
 const combatLogEl = document.createElement("div")
 combatLogEl.className = "combat-log"
@@ -128,20 +134,21 @@ function render() {
 
 function enemyChoice() {
     setTimeout(function() {
-    if (turn === currentEnemy.turn){
-    player.hp -= currentEnemy.dmg
-    combatLogEl.innerText = `The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
-    return combatLogEl.innerText
-    }}, 2000)
+        if (turn === currentEnemy.turn){
+            player.hp -= currentEnemy.dmg
+            combatLogEl.innerText = `The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
+            fightButtonEl.style.visibility = "visible"
+            return combatLogEl.innerText
+        }}, 2000)
 }
 
 console.log(currentEnemy)
 
 function playerChoice() {
     if (turn === player.turn){
-    currentEnemy.hp -= player.dmg
-    combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.`
-    return combatLogEl.innerText
+        currentEnemy.hp -= player.dmg
+        combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.`
+        return combatLogEl.innerText
     }
 }
 
@@ -175,17 +182,17 @@ return playerCurrentStars
 }
 
 function switchCharacterTurns() {
-    if (player.win === true) {
+    if (player.win !== true) {
         return;
     } else {
-        turn *= -1;
+        return turn *= -1;
     }
 }
 
 function aliveStatus() {
     if (currentEnemy.hp <= 0) {
         currentEnemy.alive = false
-        combatLogEl.innerText = `${currentEnemy} is dead!!!`
+        combatLogEl.innerText = `${currentEnemy.name} is dead!!!`
         return combatLogEl.innerText
     }
     if (player.hp <= 0) {
@@ -202,7 +209,9 @@ function gameOver() {
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         return win = true
-    }
+    } else {
+        return
+    }    
 }
 
 // function resetWin() {
@@ -223,6 +232,7 @@ function disableMainScreen(evnt) {
     startScreenEl.remove()
     firstMessageScreenEl.classList.add('play-animation')
     firstMessageScreenEl.append(createContinueButtonEl)
+    firstMessageScreenEl.append(skipButtonEl)
     setTimeout(() => {
         createContinueButtonEl.style.visibility = 'visible';
     }, 7500);
