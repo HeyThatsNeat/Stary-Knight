@@ -1,14 +1,16 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 100, turn: -1, dmg: damage(3), stars: 1, alive: false}, 
-    {name: "enemy2", hp: 100, turn: -1, dmg: damage(4), stars: 2, alive: false}, 
-    {name: "enemy3", hp: 100, turn: -1, dmg: damage(6), stars: 3, alive: false}, 
+    {name: "enemy1", hp: 30, turn: -1, dmg: damage(3), stars: 1, alive: true}, 
+    {name: "enemy2", hp: 100, turn: -1, dmg: damage(4), stars: 2, alive: true}, 
+    {name: "enemy3", hp: 100, turn: -1, dmg: damage(6), stars: 3, alive: true}, 
     {name: "enemy4", hp: 100, turn: -1, dmg: damage(8), stars: 4, alive: true}, 
     {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
 ]
 
 const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
+
+const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -69,14 +71,16 @@ skipButtonEl.innerText = "Skip"
 
 const combatLogEl = document.createElement("div")
 combatLogEl.className = "combat-log"
+
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
+skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 fightButtonEl.addEventListener("click", render)
 /*-------------------------------- Objects -----------------------------------*/
-let player = {hp: 100, turn: 1, get dmg() {
+const player = {hp: 100, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
 }, stars: knightStars(), win: false}
 
@@ -85,7 +89,7 @@ function init() {
     startGameMenu();
     win = false;
     player.hp = 100
-    currentEnemy.hp = 100    //depend on enemy obj. and how to reset them when you lose
+    currentEnemy.hp = 30    //depend on enemy obj. and how to reset them when you lose
     turn = 1
     player.stars = 0;
 }
@@ -93,13 +97,14 @@ init()
 
 function render() {
     playerChoice()
-    // updateAfterPlayerCombatLog()
     switchCharacterTurns()
     aliveStatus()
     enemyChoice()
-    // updateAfterEnemyCombatLog()
     aliveStatus()
+    player.stars = knightStars()
     checkIfWin()
+    console.log(currentEnemy)
+    console.log(player)
 }
 
 // render() {
@@ -133,32 +138,28 @@ function render() {
 // }
 
 function enemyChoice() {
+    if(currentEnemy.hp <= 0){
+        return
+    }
     setTimeout(function() {
         if (turn === currentEnemy.turn){
             player.hp -= currentEnemy.dmg
-            combatLogEl.innerText = `The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
-            fightButtonEl.style.visibility = "visible"
-            return combatLogEl.innerText
-        }}, 2000)
-}
+            combatLogEl.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.<br>`
+            return combatLogEl.innerHTML
+        }},2000)
+        }
 
-console.log(currentEnemy)
 
 function playerChoice() {
+    if(currentEnemy.hp <= 0){
+        return
+    }
     if (turn === player.turn){
         currentEnemy.hp -= player.dmg
-        combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.`
-        return combatLogEl.innerText
+        combatLogEl.innerHTML += `• The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.<br>`
+        return combatLogEl.innerHTML
     }
 }
-
-// function updateAfterPlayerCombatLog() {
-//     combatLogEl.innerText = `The player did ${player.dmg} and the ${currentEnemy} has ${currentEnemy.hp} left.`
-// }
-
-// function updateAfterEnemyCombatLog() {
-//     combatLogEl.innerText = `The ${currentEnemy} did ${currentEnemy.dmg} and the player has ${player.hp} left.`
-// }
 
 // IN ENEMY OBJECTS
 function damage(num) {
@@ -175,27 +176,33 @@ function knightStars() {
     for (let i = 0; i < enemies.length; i++) {
     if (enemies[i].alive === false) {
         playerCurrentStars += enemies[i].stars
-        enemies[i].stars = 0
+        return enemies[i].stars = 0
     }
 }
 return playerCurrentStars
 }
 
 function switchCharacterTurns() {
-    if (player.win !== true) {
-        return;
+    if(currentEnemy.hp <= 0){
+        return
+    }
+    turn *= -1
+    if (turn === player.turn){
+        return combatLogEl.innerHTML += `• It's player turn!<br>`
     } else {
-        return turn *= -1;
+        return combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
     }
 }
 
 function aliveStatus() {
     if (currentEnemy.hp <= 0) {
         currentEnemy.alive = false
-        combatLogEl.innerText = `${currentEnemy.name} is dead!!!`
-        return combatLogEl.innerText
+        currentEnemy.stars
+        combatLogEl.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
+        return combatLogEl.innerHTML
     }
     if (player.hp <= 0) {
+
         return gameOver()
     }
 }
@@ -208,10 +215,14 @@ function gameOver() {
 
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
+        winningTheme.play()
+        winningTheme.volume = 0.08
+        firstBattleMusic.pause()
+        firstBattleMusic.currentTime = 0
+        fightButtonEl.style.zIndex = -1
+        
         return win = true
-    } else {
-        return
-    }    
+    } 
 }
 
 // function resetWin() {
@@ -249,10 +260,12 @@ function disableFirstMessageScreen(evnt) {
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
     battleScreenEl.append(fightButtonEl)
-    firstBattleMusic.volume = 0.03
+    firstBattleMusic.volume = 0.05
     firstBattleMusic.play()
     firstBattleMusic.loop = true
     battleScreenEl.append(combatLogEl)
+    // combatLogEl.appendChild(combatLogUlListEl)
+    // combatLogUlListEl.appendChild(combatLogLiEl)
     evnt.stopPropagation()
 }
 
