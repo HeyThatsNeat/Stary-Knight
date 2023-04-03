@@ -1,10 +1,10 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 100, turn: -1, dmg: damage(6), stars: 1, alive: false}, 
-    {name: "enemy2", hp: 100, turn: -1, dmg: damage(7), stars: 2, alive: false}, 
-    {name: "enemy3", hp: 100, turn: -1, dmg: damage(8), stars: 3, alive: false}, 
-    {name: "enemy4", hp: 100, turn: -1, dmg: damage(9), stars: 4, alive: true}, 
+    {name: "enemy1", hp: 100, turn: -1, dmg: damage(3), stars: 1, alive: false}, 
+    {name: "enemy2", hp: 100, turn: -1, dmg: damage(4), stars: 2, alive: false}, 
+    {name: "enemy3", hp: 100, turn: -1, dmg: damage(6), stars: 3, alive: false}, 
+    {name: "enemy4", hp: 100, turn: -1, dmg: damage(8), stars: 4, alive: true}, 
     {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
 ]
 
@@ -12,6 +12,9 @@ const enemies = [
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
 
+let currentEnemy = enemies.find(function(enemy) {
+    return enemy.alive === true || enemy.stars > 0
+})
 
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
@@ -107,7 +110,6 @@ init()
                 
 // function fight() {
 //     gameLevel = updateGameLevel()
-//     win = false
 //     playerHP = 100
 //     computerHp = 100
 //     combatLog = empty
@@ -115,6 +117,12 @@ init()
 //     startFight = true
 //     actionMenu = true
 // }
+
+function computerChoice() {
+    return currentEnemy.dmg
+}
+
+console.log(setTimeout(computerChoice, 4000))
 
 function damage(num) {
     return Math.floor(Math.random() * num)
@@ -142,19 +150,11 @@ function switchCharacterTurns() {
     }
 }
 
-let currentEnemy = enemies.find(function(enemy) {
-    return enemy.alive === true
-})
-currentEnemy.alive = false
-console.log(currentEnemy)
-
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         return win = true
     }
 }
-
-console.log(checkIfWin())
 
 function resetWin() {
     return win = false
