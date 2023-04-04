@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 30, turn: -1, dmg: damage(3), stars: 1, alive: true}, 
+    {name: "enemy1", hp: 100, turn: -1, dmg: damage(3), stars: 1, alive: true}, 
     {name: "enemy2", hp: 100, turn: -1, dmg: damage(4), stars: 2, alive: true}, 
     {name: "enemy3", hp: 100, turn: -1, dmg: damage(6), stars: 3, alive: true}, 
     {name: "enemy4", hp: 100, turn: -1, dmg: damage(8), stars: 4, alive: true}, 
@@ -11,6 +11,8 @@ const enemies = [
 const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
+
+const mainMenuMusic = new Audio("../css/audio/Main-Menu.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -75,6 +77,14 @@ const youWinMessageEl = document.createElement("h1")
 youWinMessageEl.className = "you-win-message"
 youWinMessageEl.innerText = "Congratulations! You get your stars back!"
 
+const resetButtonEl = document.createElement('button')
+resetButtonEl.className = "reset-button"
+resetButtonEl.innerText = "Restart?"
+
+const muteButton1El = document.createElement("button")
+muteButton1El.className = "mute-button"
+muteButton1El.innerText = "Toggle Sound"
+
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 
@@ -82,20 +92,23 @@ createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 fightButtonEl.addEventListener("click", render)
+resetButtonEl.addEventListener("click", resetButton)
+muteButton1El.addEventListener("click", toggleMuted1)
 /*-------------------------------- Objects -----------------------------------*/
 const player = {hp: 100, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
 }, stars: 0, win: false}
 /*-------------------------------- Functions ---------------------------------*/
 function init() {
-    startGameMenu();
-    win = false;
+    startGameMenu()
+    win = false
     player.hp = 100
-    currentEnemy.hp = 30    //depend on enemy obj. and how to reset them when you lose
+    currentEnemy.hp = 100
     turn = 1
     player.stars = 0
 }
 init()
+
 
 function render() {
     playerChoice()
@@ -196,9 +209,33 @@ function checkIfWin(){
     } 
 }
 
-// function resetWin() {
-//     return win = false
-// }
+function toggleMuted1() {
+    mainMenuMusic.muted = !mainMenuMusic.muted
+    firstBattleMusic.muted = !firstBattleMusic.muted
+    winningTheme.muted = !winningTheme.muted
+}
+
+
+function resetButton() {
+    win = false
+    player.hp = 100
+    currentEnemy.hp = 100
+    combatLog = ""
+    turn = 1
+    player.stars = 0
+    enemies.forEach(function(enemy) {
+        enemy.stars = 0
+        enemy.alive = true
+        enemy.hp = 100
+    })
+}
+
+
+function playMainMenu() {
+    mainMenuMusic.play()
+    mainMenuMusic.loop = true
+    mainMenuMusic.volume = .1
+}
 
 // HAPPENING ON CLICK
 function startGameMenu() {
@@ -206,15 +243,21 @@ function startGameMenu() {
     startScreenEl.append(createStartMenuImg)
     startScreenEl.append(createStartButtonEl)
     startScreenEl.append(menuTitleEl)
+    startScreenEl.append(muteButton1El)
+    return playMainMenu()
 }
 
 
 // HAPPENING ON CLICK
 function disableMainScreen(evnt) {
     startScreenEl.remove()
+    mainMenuMusic.pause() 
+    mainMenuMusic.currentTime = 0
     firstMessageScreenEl.classList.add('play-animation')
     firstMessageScreenEl.append(createContinueButtonEl)
     firstMessageScreenEl.append(skipButtonEl)
+    firstMessageScreenEl.append(resetButtonEl)
+    firstMessageScreenEl.append(muteButton1El)
     setTimeout(() => {
         createContinueButtonEl.style.visibility = 'visible';
     }, 7500);
@@ -231,13 +274,12 @@ function disableFirstMessageScreen(evnt) {
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
     battleScreenEl.append(fightButtonEl)
-    firstBattleMusic.volume = 0.05
+    firstBattleMusic.volume = 0.04
     firstBattleMusic.play()
     firstBattleMusic.loop = true
     battleScreenEl.append(combatLogEl)
-    
-    // combatLogEl.appendChild(combatLogUlListEl)
-    // combatLogUlListEl.appendChild(combatLogLiEl)
+    battleScreenEl.append(resetButtonEl)
+    battleScreenEl.append(muteButton1El)
     evnt.stopPropagation()
 }
 
