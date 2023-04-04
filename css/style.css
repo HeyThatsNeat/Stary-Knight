@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
+
 
 /* START SCREEN */
 .start-screen {
@@ -228,6 +230,17 @@ html{
     left: 00%;
     top: 80%;
     white-space: pre-line;
+}
+
+.you-win-message {
+    position: absolute;
+    font-family: 'ArcadeClassic', sans-serif;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: white;
+    font-size: 10vmin;
 }
 
 /* .ul-container {
