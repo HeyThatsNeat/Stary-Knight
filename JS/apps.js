@@ -85,6 +85,8 @@ const muteButton1El = document.createElement("button")
 muteButton1El.className = "mute-button"
 muteButton1El.innerText = "Toggle Sound"
 
+const typeWriter1Animation = document.querySelector('.anim-typewriter')
+const typeWriter2Animation = document.querySelector('.anim-typewriter2')
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 
@@ -217,17 +219,47 @@ function toggleMuted1() {
 
 
 function resetButton() {
-    win = false
-    player.hp = 100
-    currentEnemy.hp = 100
-    combatLog = ""
-    turn = 1
-    player.stars = 0
+    if (mainMenuMusic.muted === false) {
+        mainMenuMusic.pause()
+        mainMenuMusic.currentTime = 0
+    }
+    if (firstBattleMusic.muted === false) {
+        firstBattleMusic.pause()
+        firstBattleMusic.currentTime = 0
+    }
+    if (winningTheme.muted === false) {
+        winningTheme.pause()
+        winningTheme.currentTime = 0
+    }
+    startScreenEl.style.display = 'inline'
+    firstMessageScreenEl.style.display = 'flex'
+    battleScreenEl.style.display = 'inline'
+
+    createContinueButtonEl.style.visibility = 'hidden'
+    skipButtonEl.style.visibility = 'hidden'
+    resetButtonEl.style.visibility = 'hidden'
+    init()
     enemies.forEach(function(enemy) {
         enemy.stars = 0
         enemy.alive = true
         enemy.hp = 100
     })
+}
+
+let continueTimeout = setTimeout(() => {
+    createContinueButtonEl.style.visibility = 'visible';
+}, 7500)
+
+
+function resetFirstanimationScreen() {
+    typeWriter1Animation.style.animation = 'none';
+    typeWriter1Animation.offsetHeight; /* trigger reflow */
+    typeWriter1Animation.style.animation = null; 
+
+    typeWriter2Animation.style.animation = 'none';
+    typeWriter2Animation.offsetHeight; /* trigger reflow */
+    typeWriter2Animation.style.animation = null; 
+
 }
 
 
@@ -250,23 +282,31 @@ function startGameMenu() {
 
 // HAPPENING ON CLICK
 function disableMainScreen(evnt) {
-    startScreenEl.remove()
+    startScreenEl.style.display = 'none'
     mainMenuMusic.pause() 
     mainMenuMusic.currentTime = 0
     firstMessageScreenEl.classList.add('play-animation')
+    resetFirstanimationScreen()
     firstMessageScreenEl.append(createContinueButtonEl)
+    createContinueButtonEl.style.visibility = 'hidden'
     firstMessageScreenEl.append(skipButtonEl)
+    skipButtonEl.style.visibility = 'visible'
     firstMessageScreenEl.append(resetButtonEl)
+    resetButtonEl.style.visibility = 'visible'
     firstMessageScreenEl.append(muteButton1El)
+    if (startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
     setTimeout(() => {
+        if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
         createContinueButtonEl.style.visibility = 'visible';
+        }
     }, 7500);
+}
     evnt.stopPropagation()
 }
 
 // HAPPENING ON CLICK
 function disableFirstMessageScreen(evnt) {
-    firstMessageScreenEl.remove()
+    firstMessageScreenEl.style.display = 'none'
     createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
     battleScreenEl.append(createFirstBattleImg)
     createKnightImg.src="../css/knight-animation.gif"

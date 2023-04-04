@@ -83,7 +83,6 @@ html{
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    visibility: hidden;
 }
 
 .reset-button {
