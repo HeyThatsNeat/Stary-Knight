@@ -101,15 +101,33 @@ const player = {hp: 100, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
 }, stars: 0, win: false}
 /*-------------------------------- Functions ---------------------------------*/
+
+// NEED TO FIX ENEMY DMG FROM STAYING THE SAME EVERY TIME
+// NEED TO FIX THE RESET BUTTON NOT GIVING BACK ENEMY STARS
+
+
 function init() {
     startGameMenu()
     win = false
     player.hp = 100
-    currentEnemy.hp = 100
+    currentEnemy.hp = 30
     turn = 1
     player.stars = 0
+
+    // enemies.forEach(function(enemyObj) {
+    //     enemyObj.hp = 30
+    //     enemyObj.alive = true
+    // })
+    
+    console.log("THIS IS THE INIT",player.stars)
+    console.log(player.hp)
+    console.log(turn)
+    console.log(win)
+    console.log(enemies)
+    console.log(player)
 }
 init()
+
 
 
 function render() {
@@ -119,8 +137,6 @@ function render() {
     aliveStatus()
     knightStars()
     checkIfWin()
-    console.log(currentEnemy)
-    console.log(player)
 }
 
 
@@ -195,7 +211,6 @@ function aliveStatus() {
 function gameOver() {
     // show a game over page or message 
     // return back to the main menu
-    init() ///// ???? maybe have that there
 }
 
 function checkIfWin(){
@@ -206,6 +221,8 @@ function checkIfWin(){
         firstBattleMusic.currentTime = 0
         fightButtonEl.style.zIndex = -1
         battleScreenEl.append(youWinMessageEl)
+        youWinMessageEl.style.visibility = "visible"
+        battleScreenEl.style.visibility = "visible"
         
         return win = true
     } 
@@ -238,30 +255,39 @@ function resetButton() {
     createContinueButtonEl.style.visibility = 'hidden'
     skipButtonEl.style.visibility = 'hidden'
     resetButtonEl.style.visibility = 'hidden'
+
+    createFirstBattleImg.style.visibility = 'hidden'
+    createKnightImg.style.visibility = 'hidden'
+    stoneGolemGif.style.visibility = 'hidden'
+    fightButtonEl.style.visibility = 'hidden'
+    combatLogEl.style.visibility = 'hidden'
+    youWinMessageEl.style.visibility = "hidden"
+    
+    for (let i = 0; i < enemies.length; i++) {
+        enemies[i].stars = i + 1  
+        enemies[i].alive = true
+        enemies[i].hp = 30
+    }
+
     init()
-    enemies.forEach(function(enemy) {
-        enemy.stars = 0
-        enemy.alive = true
-        enemy.hp = 100
-    })
+    
+    console.log("THIS IS THE RESET",player.stars)
+    console.log(player.hp)
+    console.log(turn)
+    console.log(win)
+    console.log(enemies)
+    console.log(player)
 }
-
-let continueTimeout = setTimeout(() => {
-    createContinueButtonEl.style.visibility = 'visible';
-}, 7500)
-
 
 function resetFirstanimationScreen() {
-    typeWriter1Animation.style.animation = 'none';
-    typeWriter1Animation.offsetHeight; /* trigger reflow */
-    typeWriter1Animation.style.animation = null; 
+    typeWriter1Animation.style.animation = 'none'
+    typeWriter1Animation.offsetHeight
+    typeWriter1Animation.style.animation = null 
 
-    typeWriter2Animation.style.animation = 'none';
-    typeWriter2Animation.offsetHeight; /* trigger reflow */
+    typeWriter2Animation.style.animation = 'none'
+    typeWriter2Animation.offsetHeight;
     typeWriter2Animation.style.animation = null; 
-
 }
-
 
 function playMainMenu() {
     mainMenuMusic.play()
@@ -271,6 +297,7 @@ function playMainMenu() {
 
 // HAPPENING ON CLICK
 function startGameMenu() {
+    // startScreenEl.style.display = "none"
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
     startScreenEl.append(createStartButtonEl)
@@ -308,16 +335,22 @@ function disableMainScreen(evnt) {
 function disableFirstMessageScreen(evnt) {
     firstMessageScreenEl.style.display = 'none'
     createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
+    // createFirstBattleImg.style.visibility = "visible"
     battleScreenEl.append(createFirstBattleImg)
+    createFirstBattleImg.style.visibility = 'visible'
     createKnightImg.src="../css/knight-animation.gif"
     battleScreenEl.append(createKnightImg)
+    createKnightImg.style.visibility = 'visible'
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
+    stoneGolemGif.style.visibility = 'visible'
     battleScreenEl.append(fightButtonEl)
+    fightButtonEl.style.visibility = 'visible'
     firstBattleMusic.volume = 0.04
     firstBattleMusic.play()
     firstBattleMusic.loop = true
     battleScreenEl.append(combatLogEl)
+    combatLogEl.style.visibility = 'visible'
     battleScreenEl.append(resetButtonEl)
     battleScreenEl.append(muteButton1El)
     evnt.stopPropagation()
