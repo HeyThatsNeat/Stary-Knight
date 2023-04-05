@@ -277,6 +277,25 @@ html{
     z-index: inherit;
 }
 
+/* SHOWS UP AFTER ENEMY IS DEFEATED */
+.continue-after-enemy1-button {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: inherit;
+}
+
+/* GAME OVER SCREEN */
+
 #overlay {
     position: absolute;
     visibility: visible;
@@ -315,6 +334,24 @@ html{
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     background-color: #8336ad;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: inherit;
+}
+
+/* SECOND MESSAGE SCREEN */
+
+.continue-button2 {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
     color: white;
     font-size: 16px;
     padding: 12px 24px;

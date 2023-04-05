@@ -1,11 +1,11 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 100, turn: -1, dmg: damage(3), stars: 1, alive: true}, 
-    {name: "enemy2", hp: 100, turn: -1, dmg: damage(4), stars: 2, alive: true}, 
-    {name: "enemy3", hp: 100, turn: -1, dmg: damage(6), stars: 3, alive: true}, 
-    {name: "enemy4", hp: 100, turn: -1, dmg: damage(8), stars: 4, alive: true}, 
-    {name: "enemy5", hp: 100, turn: -1, dmg: damage(10), stars: 5, alive: true}
+    {name: "enemy1", hp: 100, turn: -1, dmg: 0, stars: 1, alive: true}, 
+    {name: "enemy2", hp: 100, turn: -1, dmg: 0, stars: 2, alive: true}, 
+    {name: "enemy3", hp: 100, turn: -1, dmg: 0, stars: 3, alive: true}, 
+    {name: "enemy4", hp: 100, turn: -1, dmg: 0, stars: 4, alive: true}, 
+    {name: "enemy5", hp: 100, turn: -1, dmg: 0, stars: 5, alive: true}
 ]
 
 const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
@@ -13,17 +13,15 @@ const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
 const mainMenuMusic = new Audio("../css/audio/Main-Menu.mp3")
-
+mainMenuMusic.preload
 const gameOverMusic = new Audio("../css/audio/33 - Game Over.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
 
 let currentEnemy = enemies.find(function(enemy) {
-    return enemy.alive === true || enemy.stars > 0
+    return enemy.alive === true && enemy.stars > 0
 })
-
-
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
 createStartMenuImg.className = "start-img"
@@ -38,12 +36,17 @@ const createContinueButtonEl = document.createElement("button")
 createContinueButtonEl.className = "continue-button"
 createContinueButtonEl.innerText = "Continue"
 
+const createContinueButton2El = document.createElement("button")
+createContinueButton2El.className =  "continue-button2"
+createContinueButton2El.innerText = "Continue"
+
 
 const startScreenEl = document.querySelector(".start-screen")
 
 
 const firstMessageScreenEl = document.querySelector(".first-message")
 
+const secondMessageScreenEl = document.querySelector(".second-message")
 
 const menuTitleEl = document.createElement("h1")
 menuTitleEl.className = "menu-title"
@@ -102,11 +105,14 @@ const gameOverResetButtonEl = document.createElement("button")
 gameOverResetButtonEl.className = "game-over-reset-button"
 gameOverResetButtonEl.innerText = "Try Again?"
 
+const continueAfterEnemy1ButtonEl = document.createElement("button")
+continueAfterEnemy1ButtonEl.className = "continue-after-enemy1-button"
+continueAfterEnemy1ButtonEl.innerText = "Forward!"
+
 const typeWriter1Animation = document.querySelector('.anim-typewriter')
 const typeWriter2Animation = document.querySelector('.anim-typewriter2')
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
-
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
@@ -115,6 +121,7 @@ resetButtonEl.addEventListener("click", resetButton)
 gameOverResetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
+continueAfterEnemy1ButtonEl.addEventListener("click", disableFirstBattleScreen)
 /*-------------------------------- Objects -----------------------------------*/
 const player = {hp: 50, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
@@ -122,7 +129,7 @@ const player = {hp: 50, turn: 1, get dmg() {
 /*-------------------------------- Functions ---------------------------------*/
 
 // NEED TO FIX ENEMY DMG FROM STAYING THE SAME EVERY TIME
-// NEED TO FIX THE RESET BUTTON NOT GIVING BACK ENEMY STARS
+
 
 
 function init() {
@@ -133,11 +140,6 @@ function init() {
     turn = 1
     player.stars = 0
 
-    // enemies.forEach(function(enemyObj) {
-    //     enemyObj.hp = 30
-    //     enemyObj.alive = true
-    // })
-    
     console.log("THIS IS THE INIT",player.stars)
     console.log(player.hp)
     console.log(turn)
@@ -151,7 +153,9 @@ init()
 
 function render() {
     playerChoice()
+    console.log(currentEnemy)
     switchCharacterTurns()
+    currentEnemyDamage()
     enemyChoice()
     aliveStatus()
     knightStars()
@@ -159,6 +163,16 @@ function render() {
     return
 }
 
+
+function updateEnemy() {
+    if (currentEnemy.alive === true) {
+        return
+    } else {
+        currentEnemy = enemies.find(function(enemy) {
+        return enemy.alive === true && enemy.stars > 0
+        })
+    }
+}
 
 function enemyChoice() {
     if(currentEnemy.hp <= 0 || player.hp <= 0) {
@@ -192,8 +206,8 @@ function playerChoice() {
 }
 
 // IN ENEMY OBJECTS
-function damage(num) {
-    return Math.floor(Math.random() * num)
+function currentEnemyDamage() {
+    currentEnemy.dmg = Math.floor(Math.random() * 1)
 }
 
 // IN PLAYER OBJECT
@@ -241,6 +255,7 @@ function gameOver() {
         player.alive = false
         combatLogEl.innerHTML += `• You have been knocked out! <br>`
     }
+    console.log(currentEnemy)
 }
     // show a game over page or message 
     // return back to the main menu
@@ -267,12 +282,16 @@ function checkIfWin(){
         battleScreenEl.append(youWinMessageEl)
         youWinMessageEl.style.visibility = "visible"
         battleScreenEl.style.visibility = "visible"
+        battleScreenEl.append(continueAfterEnemy1ButtonEl)
     }
     return 
 }
 
 function toggleMuted1() {
+        playMainMenu()
+    if (mainMenuMusic.currentTime > 1){
     mainMenuMusic.muted = !mainMenuMusic.muted
+    }
     firstBattleMusic.muted = !firstBattleMusic.muted
     winningTheme.muted = !winningTheme.muted
     gameOverMusic.muted = !gameOverMusic.muted
@@ -330,7 +349,7 @@ function resetButton() {
     console.log(player)
 }
 
-function resetFirstanimationScreen() {
+function resetFirstAnimationScreen() {
     typeWriter1Animation.style.animation = 'none'
     typeWriter1Animation.offsetHeight
     typeWriter1Animation.style.animation = null 
@@ -338,6 +357,16 @@ function resetFirstanimationScreen() {
     typeWriter2Animation.style.animation = 'none'
     typeWriter2Animation.offsetHeight
     typeWriter2Animation.style.animation = null 
+}
+
+function resetSecondAnimationScreen() {
+    typeWriter3Animation.style.animation = 'none'
+    typeWriter3Animation.offsetHeight
+    typeWriter3Animation.style.animation = null 
+
+    typeWriter4Animation.style.animation = 'none'
+    typeWriter4Animation.offsetHeight
+    typeWriter4Animation.style.animation = null 
 }
 
 function playMainMenu() {
@@ -363,7 +392,7 @@ function disableMainScreen(evnt) {
     mainMenuMusic.pause() 
     mainMenuMusic.currentTime = 0
     firstMessageScreenEl.classList.add('play-animation')
-    resetFirstanimationScreen()
+    resetFirstAnimationScreen()
     firstMessageScreenEl.append(createContinueButtonEl)
     createContinueButtonEl.style.visibility = 'hidden'
     firstMessageScreenEl.append(skipButtonEl)
@@ -404,10 +433,27 @@ function disableFirstMessageScreen(evnt) {
     battleScreenEl.append(resetButtonEl)
     battleScreenEl.append(muteButton1El)
     evnt.stopPropagation()
+
+    //when the enemy dies, add a forward button
 }
 
-
+// GAME OVER SCREEN
 gameOverScreenEl.append(gameoverMuteButtonEl)
 gameOverScreenEl.append(gameOverResetButtonEl)
 
+// HAPPENING ON CLICK
+function disableFirstBattleScreen(evnt) {
+    battleScreenEl.style.display = "none"
+    updateEnemy()
+    firstBattleMusic.pause()
+    firstBattleMusic.currentTime = 0
+    secondMessageScreenEl.classList.add('play-animation2')
+    resetSecondAnimationScreen()
+    secondMessageScreenEl.append(createContinueButton2El)
+    createContinueButton2El.style.visibility = 'hidden'
+    // append skipbutton2 that you have to make to the 2nd message screen next
+
+    evnt.stopPropagation()
+    // dont forget to update the reset button!!
+}
 //   level3Render() //to be implemented
