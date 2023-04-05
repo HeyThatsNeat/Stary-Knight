@@ -83,6 +83,9 @@ const gameOverScreenEl = document.createElement("div")
 gameOverScreenEl.id = "overlay"
 gameOverScreenEl.innerText = "GAME OVER"
 
+const bodyEl = document.querySelector("body")
+bodyEl.appendChild(gameOverScreenEl)
+
 const resetButtonEl = document.createElement('button')
 resetButtonEl.className = "reset-button"
 resetButtonEl.innerText = "Restart?"
@@ -90,6 +93,14 @@ resetButtonEl.innerText = "Restart?"
 const muteButton1El = document.createElement("button")
 muteButton1El.className = "mute-button"
 muteButton1El.innerText = "Toggle Sound"
+
+const gameoverMuteButtonEl = document.createElement("button")
+gameoverMuteButtonEl.className = "game-over-mute-button"
+gameoverMuteButtonEl.innerText = "Toggle Mute"
+
+const gameOverResetButtonEl = document.createElement("button")
+gameOverResetButtonEl.className = "game-over-reset-button"
+gameOverResetButtonEl.innerText = "Try Again?"
 
 const typeWriter1Animation = document.querySelector('.anim-typewriter')
 const typeWriter2Animation = document.querySelector('.anim-typewriter2')
@@ -101,9 +112,11 @@ skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 fightButtonEl.addEventListener("click", render)
 resetButtonEl.addEventListener("click", resetButton)
+gameOverResetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
+gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
 /*-------------------------------- Objects -----------------------------------*/
-const player = {hp: 1, turn: 1, get dmg() {
+const player = {hp: 50, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
 }, stars: 0, win: false, alive: true}
 /*-------------------------------- Functions ---------------------------------*/
@@ -115,7 +128,7 @@ const player = {hp: 1, turn: 1, get dmg() {
 function init() {
     startGameMenu()
     win = false
-    player.hp = 1
+    player.hp = 50
     currentEnemy.hp = 30
     turn = 1
     player.stars = 0
@@ -138,30 +151,29 @@ init()
 
 function render() {
     playerChoice()
-    console.log("THIS IS PLAYER",player.hp)
     switchCharacterTurns()
     enemyChoice()
     aliveStatus()
     knightStars()
     checkIfWin()
-    
+    return
 }
 
 
 function enemyChoice() {
-    if(currentEnemy.hp <= 0 || player.hp <= 0){
+    if(currentEnemy.hp <= 0 || player.hp <= 0) {
         return
     }
     setTimeout(function() {
-        if (turn === currentEnemy.turn && player.hp > 0) {
+        if (player.hp > 0) {
             player.hp -= currentEnemy.dmg
             combatLogEl.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and the player has ${player.hp} HP left.<br>`
             gameOver()
-        if (turn === player.turn && player.alive !== false){
+        if (player.alive !== false){
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
         }
         }
-    },2000)
+    }, 1000)
 }
 
 
@@ -169,12 +181,12 @@ function playerChoice() {
     if(currentEnemy.hp <= 0){
         return
     }
-    if (turn === player.turn && player.hp > 0){
+    if (player.hp > 0){
         currentEnemy.hp -= player.dmg
         combatLogEl.innerHTML += `• The player did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
         gameOver()
     }
-    if (turn === player.turn && player.alive !== false) {
+    if (player.alive !== false) {
         combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
     }
 }
@@ -196,6 +208,7 @@ function knightStars() {
         currentEnemy.stars = 0
         return player.stars
     }
+    return 
 }
 
 
@@ -212,15 +225,19 @@ function aliveStatus() {
         combatLogEl.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
         return combatLogEl.innerHTML
     }
+    return
 }
 
 function gameOver() {
     if (player.hp < 1) {
-        gameOverOn()
+        setTimeout(() => {
+            gameOverOn()
+            }, 1500)
         console.log("ALIVE STATUS",player.hp)
         firstBattleMusic.pause()
         gameOverMusic.play()
         gameOverMusic.volume = 0.5
+        gameOverMusic.loop = true
         player.alive = false
         combatLogEl.innerHTML += `• You have been knocked out! <br>`
     }
@@ -230,11 +247,14 @@ function gameOver() {
 
 
 function gameOverOn() {
-    gameOverScreenEl.style.display = "inline";
+    gameOverScreenEl.style.display = "block";
+    gameOverScreenEl.style.visibility = 'visible'
+    gameOverScreenEl.style.zIndex = 5
 }
 
 function gameOverOff() {
     gameOverScreenEl.style.display = "none";
+    gameOverScreenEl.style.zIndex = -10
 }
 
 function checkIfWin(){
@@ -247,15 +267,15 @@ function checkIfWin(){
         battleScreenEl.append(youWinMessageEl)
         youWinMessageEl.style.visibility = "visible"
         battleScreenEl.style.visibility = "visible"
-        
-        return win = true
-    } 
+    }
+    return 
 }
 
 function toggleMuted1() {
     mainMenuMusic.muted = !mainMenuMusic.muted
     firstBattleMusic.muted = !firstBattleMusic.muted
     winningTheme.muted = !winningTheme.muted
+    gameOverMusic.muted = !gameOverMusic.muted
 }
 
 
@@ -291,6 +311,7 @@ function resetButton() {
     combatLogEl.style.visibility = 'hidden'
     combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
+    
     gameOverOff()
     
     for (let i = 0; i < enemies.length; i++) {
@@ -315,8 +336,8 @@ function resetFirstanimationScreen() {
     typeWriter1Animation.style.animation = null 
 
     typeWriter2Animation.style.animation = 'none'
-    typeWriter2Animation.offsetHeight;
-    typeWriter2Animation.style.animation = null; 
+    typeWriter2Animation.offsetHeight
+    typeWriter2Animation.style.animation = null 
 }
 
 function playMainMenu() {
@@ -327,7 +348,6 @@ function playMainMenu() {
 
 // HAPPENING ON CLICK
 function startGameMenu() {
-    // startScreenEl.style.display = "none"
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
     startScreenEl.append(createStartButtonEl)
@@ -386,5 +406,8 @@ function disableFirstMessageScreen(evnt) {
     evnt.stopPropagation()
 }
 
+
+gameOverScreenEl.append(gameoverMuteButtonEl)
+gameOverScreenEl.append(gameOverResetButtonEl)
 
 //   level3Render() //to be implemented
