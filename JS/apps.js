@@ -199,7 +199,7 @@ function enemyChoice() {
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
         }
         }
-    }, 1000)
+    }, 1500)
 }
 
 
@@ -455,6 +455,8 @@ function disableFirstMessageScreen(evnt) {
     combatLogEl.style.visibility = 'visible'
     battleScreenEl.append(resetButtonEl)
     battleScreenEl.append(muteButton1El)
+    firstMessageScreenMusic.pause()
+    firstMessageScreenMusic.currentTime = 0
     evnt.stopPropagation()
 
     //when the enemy dies, add a forward button
