@@ -25,6 +25,7 @@ let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMen
 let currentEnemy = enemies.find(function(enemy) {
     return enemy.alive === true && enemy.stars > 0
 })
+console.log("INITIAL CURRENT ENEMY",currentEnemy)
 
 let continueButtonTimeout = setTimeout(() => {
     if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
@@ -90,11 +91,16 @@ combatLogEl.className = "combat-log"
 
 const youWinMessageEl = document.createElement("h1")
 youWinMessageEl.className = "you-win-message"
-youWinMessageEl.innerText = "Congratulations! You get your stars back!"
+youWinMessageEl.innerText = "Congratulations! You  get  your  stars  back!"
 
 const gameOverScreenEl = document.createElement("div")
 gameOverScreenEl.id = "overlay"
-gameOverScreenEl.innerText = "GAME OVER"
+
+
+const gameOverMessageEl = document.createElement("p")
+gameOverMessageEl.id = "game-over-message"
+gameOverMessageEl.innerHTML = "GAME <br>OVER"
+gameOverScreenEl.append(gameOverMessageEl)
 
 const bodyEl = document.querySelector("body")
 bodyEl.appendChild(gameOverScreenEl)
@@ -165,7 +171,6 @@ init()
 
 function render() {
     playerChoice()
-    console.log(currentEnemy)
     switchCharacterTurns()
     currentEnemyDamage()
     enemyChoice()
@@ -224,7 +229,8 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 1)
+    currentEnemy.dmg = Math.floor(Math.random() * 52)
+    console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
 // IN PLAYER OBJECT

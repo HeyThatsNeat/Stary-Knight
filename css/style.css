@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
 @import url('https://fonts.cdnfonts.com/css/arcade-classic');
+@import url('https://fonts.cdnfonts.com/css/lvdc-game-over');
 
 
 /* START SCREEN */
@@ -273,7 +274,7 @@ html{
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     color: white;
-    font-size: 10vmin;
+    font-size: 75px;
 }
 
 .mute-button {
@@ -321,10 +322,41 @@ html{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #191919; /* Black background with opacity */
+    background-color: #393939; /* Black background with opacity */
     z-index: -10; 
     cursor: default;
 }
+
+#game-over-message {
+    position: absolute;
+    font-family: 'LVDC Game Over 2', sans-serif;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+    line-height: 17vmin;
+    -webkit-text-stroke: 4px #191919;
+    text-shadow: -8px -10px #191919;
+    animation-duration: 3s;
+    animation-name: slidein;
+    overflow: hidden;
+}
+
+@keyframes slidein {
+    from {
+        top: -40%;
+        left: 50%;
+    }
+
+    to {
+        top: 20%;
+        left: 50%;
+    }
+}
+
 
 .game-over-mute-button {
     position: absolute;
