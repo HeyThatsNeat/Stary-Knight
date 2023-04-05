@@ -359,6 +359,8 @@ function resetButton() {
     
     gameOverOff()
     
+    fightButtonEl.disabled = false
+
     for (let i = 0; i < enemies.length; i++) {
         enemies[i].stars = i + 1  
         enemies[i].alive = true
@@ -421,14 +423,14 @@ function disableMainScreen(evnt) {
     firstMessageScreenEl.classList.add('play-animation')
     // you have to put it here because it resets and the animation plays right away. If you put it in the resert button, the animation will start playing while youre in the start screen
     resetFirstAnimationScreen()
-    firstMessageScreenEl.append(createContinueButtonEl)
     createContinueButtonEl.style.visibility = 'hidden'
     firstMessageScreenEl.append(skipButtonEl)
     skipButtonEl.style.visibility = 'visible'
     firstMessageScreenEl.append(resetButtonEl)
     resetButtonEl.style.visibility = 'visible'
     firstMessageScreenEl.append(muteButton1El)
-    firstMessageScreenMusic.addEventListener("ended", function() {    
+    firstMessageScreenMusic.addEventListener("ended", function() { 
+        firstMessageScreenEl.append(createContinueButtonEl)   
         createContinueButtonEl.style.visibility = 'visible'
         console.log("animation end")
         })
