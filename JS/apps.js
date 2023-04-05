@@ -14,7 +14,10 @@ const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgi
 
 const mainMenuMusic = new Audio("../css/audio/Main-Menu.mp3")
 mainMenuMusic.preload
+
 const gameOverMusic = new Audio("../css/audio/33 - Game Over.mp3")
+
+const firstMessageScreenMusic = new Audio("../css/audio/7.5second-typewriting-effect.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -22,6 +25,13 @@ let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMen
 let currentEnemy = enemies.find(function(enemy) {
     return enemy.alive === true && enemy.stars > 0
 })
+
+let continueButtonTimeout = setTimeout(() => {
+    if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
+    createContinueButtonEl.style.visibility = 'visible';
+    }
+}, 7500);
+
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
 createStartMenuImg.className = "start-img"
@@ -122,6 +132,8 @@ gameOverResetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
 continueAfterEnemy1ButtonEl.addEventListener("click", disableFirstBattleScreen)
+
+
 /*-------------------------------- Objects -----------------------------------*/
 const player = {hp: 50, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
@@ -288,38 +300,41 @@ function checkIfWin(){
 }
 
 function toggleMuted1() {
+    if (startScreenEl.style.display !== 'none'){
         playMainMenu()
+    }
     if (mainMenuMusic.currentTime > 1){
     mainMenuMusic.muted = !mainMenuMusic.muted
     }
     firstBattleMusic.muted = !firstBattleMusic.muted
     winningTheme.muted = !winningTheme.muted
     gameOverMusic.muted = !gameOverMusic.muted
+    firstMessageScreenMusic.muted = !firstMessageScreenMusic.muted
 }
 
 
 function resetButton() {
-    if (mainMenuMusic.muted === false) {
         mainMenuMusic.pause()
         mainMenuMusic.currentTime = 0
-    }
-    if (firstBattleMusic.muted === false) {
+
         firstBattleMusic.pause()
         firstBattleMusic.currentTime = 0
-    }
-    if (winningTheme.muted === false) {
+
         winningTheme.pause()
         winningTheme.currentTime = 0
-    }
-    if (gameOverMusic.muted === false) {
+
         gameOverMusic.pause()
         gameOverMusic.currentTime = 0
-    }
+
+        firstMessageScreenMusic.pause()
+        firstMessageScreenMusic.currentTime = 0
+
     startScreenEl.style.display = 'inline'
     firstMessageScreenEl.style.display = 'flex'
     battleScreenEl.style.display = 'inline'
 
     createContinueButtonEl.style.visibility = 'hidden'
+
     skipButtonEl.style.visibility = 'hidden'
     resetButtonEl.style.visibility = 'hidden'
 
@@ -359,6 +374,7 @@ function resetFirstAnimationScreen() {
     typeWriter2Animation.style.animation = null 
 }
 
+
 function resetSecondAnimationScreen() {
     typeWriter3Animation.style.animation = 'none'
     typeWriter3Animation.offsetHeight
@@ -392,6 +408,7 @@ function disableMainScreen(evnt) {
     mainMenuMusic.pause() 
     mainMenuMusic.currentTime = 0
     firstMessageScreenEl.classList.add('play-animation')
+    // you have to put it here because it resets and the animation plays right away. If you put it in the resert button, the animation will start playing while youre in the start screen
     resetFirstAnimationScreen()
     firstMessageScreenEl.append(createContinueButtonEl)
     createContinueButtonEl.style.visibility = 'hidden'
@@ -400,13 +417,19 @@ function disableMainScreen(evnt) {
     firstMessageScreenEl.append(resetButtonEl)
     resetButtonEl.style.visibility = 'visible'
     firstMessageScreenEl.append(muteButton1El)
-    if (startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
-    setTimeout(() => {
-        if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
-        createContinueButtonEl.style.visibility = 'visible';
-        }
-    }, 7500);
-}
+    firstMessageScreenMusic.addEventListener("ended", function() {    
+        createContinueButtonEl.style.visibility = 'visible'
+        console.log("animation end")
+        })
+    // if (startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
+    //     continueButtonTimeout = setTimeout(() => {
+    //         if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
+    //         createContinueButtonEl.style.visibility = 'visible';
+    //         }
+    //     }, 7500);
+    // }
+    
+    firstMessageScreenMusic.play()    
     evnt.stopPropagation()
 }
 
