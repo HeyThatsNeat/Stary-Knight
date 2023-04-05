@@ -248,6 +248,7 @@ html{
     left: 00%;
     top: 80%;
     white-space: pre-line;
+    background-color: rgba(25,25,25,0.5);
 }
 
 .you-win-message {
