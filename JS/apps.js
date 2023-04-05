@@ -13,6 +13,8 @@ const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
 const mainMenuMusic = new Audio("../css/audio/Main-Menu.mp3")
+
+const gameOverMusic = new Audio("../css/audio/33 - Game Over.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -77,6 +79,10 @@ const youWinMessageEl = document.createElement("h1")
 youWinMessageEl.className = "you-win-message"
 youWinMessageEl.innerText = "Congratulations! You get your stars back!"
 
+const gameOverScreenEl = document.createElement("div")
+gameOverScreenEl.id = "overlay"
+gameOverScreenEl.innerText = "GAME OVER"
+
 const resetButtonEl = document.createElement('button')
 resetButtonEl.className = "reset-button"
 resetButtonEl.innerText = "Restart?"
@@ -97,9 +103,9 @@ fightButtonEl.addEventListener("click", render)
 resetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 /*-------------------------------- Objects -----------------------------------*/
-const player = {hp: 100, turn: 1, get dmg() {
+const player = {hp: 1, turn: 1, get dmg() {
     return knightBaseDmg() + this.stars
-}, stars: 0, win: false}
+}, stars: 0, win: false, alive: true}
 /*-------------------------------- Functions ---------------------------------*/
 
 // NEED TO FIX ENEMY DMG FROM STAYING THE SAME EVERY TIME
@@ -109,7 +115,7 @@ const player = {hp: 100, turn: 1, get dmg() {
 function init() {
     startGameMenu()
     win = false
-    player.hp = 100
+    player.hp = 1
     currentEnemy.hp = 30
     turn = 1
     player.stars = 0
@@ -132,35 +138,44 @@ init()
 
 function render() {
     playerChoice()
+    console.log("THIS IS PLAYER",player.hp)
     switchCharacterTurns()
     enemyChoice()
     aliveStatus()
     knightStars()
     checkIfWin()
+    
 }
 
 
 function enemyChoice() {
-    if(currentEnemy.hp <= 0){
+    if(currentEnemy.hp <= 0 || player.hp <= 0){
         return
     }
     setTimeout(function() {
-        if (turn === currentEnemy.turn){
+        if (turn === currentEnemy.turn && player.hp > 0) {
             player.hp -= currentEnemy.dmg
-            combatLogEl.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} and the player has ${player.hp} left.<br>`
-            return combatLogEl.innerHTML
-        }},2000)
+            combatLogEl.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and the player has ${player.hp} HP left.<br>`
+            gameOver()
+        if (turn === player.turn && player.alive !== false){
+            combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
         }
+        }
+    },2000)
+}
 
 
 function playerChoice() {
     if(currentEnemy.hp <= 0){
         return
     }
-    if (turn === player.turn){
+    if (turn === player.turn && player.hp > 0){
         currentEnemy.hp -= player.dmg
-        combatLogEl.innerHTML += `• The player did ${player.dmg} and the ${currentEnemy.name} has ${currentEnemy.hp} left.<br>`
-        return combatLogEl.innerHTML
+        combatLogEl.innerHTML += `• The player did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
+        gameOver()
+    }
+    if (turn === player.turn && player.alive !== false) {
+        combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
     }
 }
 
@@ -185,15 +200,10 @@ function knightStars() {
 
 
 function switchCharacterTurns() {
-    if(currentEnemy.hp <= 0){
+    if(currentEnemy.hp <= 0 || player.hp <= 0){
         return
     }
     turn *= -1
-    if (turn === player.turn){
-        return combatLogEl.innerHTML += `• It's player turn!<br>`
-    } else {
-        return combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
-    }
 }
 
 function aliveStatus() {
@@ -202,15 +212,29 @@ function aliveStatus() {
         combatLogEl.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
         return combatLogEl.innerHTML
     }
-    if (player.hp <= 0) {
-
-        return gameOver()
-    }
 }
 
 function gameOver() {
+    if (player.hp < 1) {
+        gameOverOn()
+        console.log("ALIVE STATUS",player.hp)
+        firstBattleMusic.pause()
+        gameOverMusic.play()
+        gameOverMusic.volume = 0.5
+        player.alive = false
+        combatLogEl.innerHTML += `• You have been knocked out! <br>`
+    }
+}
     // show a game over page or message 
     // return back to the main menu
+
+
+function gameOverOn() {
+    gameOverScreenEl.style.display = "inline";
+}
+
+function gameOverOff() {
+    gameOverScreenEl.style.display = "none";
 }
 
 function checkIfWin(){
@@ -248,6 +272,10 @@ function resetButton() {
         winningTheme.pause()
         winningTheme.currentTime = 0
     }
+    if (gameOverMusic.muted === false) {
+        gameOverMusic.pause()
+        gameOverMusic.currentTime = 0
+    }
     startScreenEl.style.display = 'inline'
     firstMessageScreenEl.style.display = 'flex'
     battleScreenEl.style.display = 'inline'
@@ -261,7 +289,9 @@ function resetButton() {
     stoneGolemGif.style.visibility = 'hidden'
     fightButtonEl.style.visibility = 'hidden'
     combatLogEl.style.visibility = 'hidden'
+    combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
+    gameOverOff()
     
     for (let i = 0; i < enemies.length; i++) {
         enemies[i].stars = i + 1  
