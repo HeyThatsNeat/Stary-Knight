@@ -97,6 +97,7 @@ const gameOverScreenEl = document.createElement("div")
 gameOverScreenEl.id = "overlay"
 
 
+
 const gameOverMessageEl = document.createElement("p")
 gameOverMessageEl.id = "game-over-message"
 gameOverMessageEl.innerHTML = "GAME <br>OVER"
@@ -157,6 +158,7 @@ function init() {
     currentEnemy.hp = 30
     turn = 1
     player.stars = 0
+    player.alive = true
 
     console.log("THIS IS THE INIT",player.stars)
     console.log(player.hp)
@@ -197,6 +199,7 @@ function enemyChoice() {
     }
     fightButtonEl.disabled = true 
     fightButtonEl.style.visibility = "hidden"
+    console.log("HIDDEN",fightButtonEl.style.visibility)
     setTimeout(function() {
         if (player.hp > 0) {
             player.hp -= currentEnemy.dmg
@@ -206,9 +209,10 @@ function enemyChoice() {
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
             fightButtonEl.disabled = false
             fightButtonEl.style.visibility = "visible"
+            console.log("SHOWING",fightButtonEl.style.visibility)
         }
         }
-    }, 1500)
+    }, 2500)
 }
 
 
@@ -288,6 +292,7 @@ function gameOverOn() {
     gameOverScreenEl.style.display = "block";
     gameOverScreenEl.style.visibility = 'visible'
     gameOverScreenEl.style.zIndex = 5
+    gameOverMessageEl.classList.add("play-game-over-animation")
 }
 
 function gameOverOff() {
@@ -301,7 +306,7 @@ function checkIfWin(){
         winningTheme.volume = 0.08
         firstBattleMusic.pause()
         firstBattleMusic.currentTime = 0
-        fightButtonEl.style.zIndex = -1
+        fightButtonEl.style.visibility = "hidden"
         battleScreenEl.append(youWinMessageEl)
         youWinMessageEl.style.visibility = "visible"
         battleScreenEl.style.visibility = "visible"
@@ -353,6 +358,8 @@ function resetButton() {
     createKnightImg.style.visibility = 'hidden'
     stoneGolemGif.style.visibility = 'hidden'
     fightButtonEl.style.visibility = 'hidden'
+    console.log(fightButtonEl.style.visibility)
+    fightButtonEl.style.zIndex = 1
     combatLogEl.style.visibility = 'hidden'
     combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
@@ -415,6 +422,7 @@ function startGameMenu() {
 }
 
 
+
 // HAPPENING ON CLICK
 function disableMainScreen(evnt) {
     startScreenEl.style.display = 'none'
@@ -461,6 +469,7 @@ function disableFirstMessageScreen(evnt) {
     stoneGolemGif.style.visibility = 'visible'
     battleScreenEl.append(fightButtonEl)
     fightButtonEl.style.visibility = 'visible'
+    console.log(fightButtonEl.style.visibility)
     firstBattleMusic.volume = 0.04
     firstBattleMusic.play()
     firstBattleMusic.loop = true

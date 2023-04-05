@@ -342,7 +342,11 @@ html{
     text-shadow: -8px -10px #191919;
     animation-duration: 3s;
     animation-name: slidein;
-    overflow: hidden;
+    animation-play-state: running;
+}
+
+.play-game-over-animation #game-over-message {
+    animation-play-state: paused;
 }
 
 @keyframes slidein {
