@@ -190,6 +190,7 @@ function enemyChoice() {
     if(currentEnemy.hp <= 0 || player.hp <= 0) {
         return
     }
+    fightButtonEl.disabled = true 
     setTimeout(function() {
         if (player.hp > 0) {
             player.hp -= currentEnemy.dmg
@@ -197,6 +198,7 @@ function enemyChoice() {
             gameOver()
         if (player.alive !== false){
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
+            fightButtonEl.disabled = false
         }
         }
     }, 1500)
@@ -207,6 +209,7 @@ function playerChoice() {
     if(currentEnemy.hp <= 0){
         return
     }
+
     if (player.hp > 0){
         currentEnemy.hp -= player.dmg
         combatLogEl.innerHTML += `• The player did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
