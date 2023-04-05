@@ -197,7 +197,7 @@ html{
     width: 100%;
     height: calc(100vh - 8em);
     padding: 0;
-    color: rgba(205, 73, 36, 0.75);
+    color: rgba(205, 73, 36, .85);
     font-family: 'Anonymous Pro', monospace;  
     background-color: #1a46a6;
 }
@@ -252,6 +252,17 @@ html{
     top: 80%;
     white-space: pre-line;
     background-color: rgba(25,25,25,0.5);
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    background: #868686;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(205, 73, 36, .85);
+    -webkit-border-radius: 0.5ex;
+    -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
 }
 
 .you-win-message {
