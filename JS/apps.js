@@ -191,6 +191,7 @@ function enemyChoice() {
         return
     }
     fightButtonEl.disabled = true 
+    fightButtonEl.style.visibility = "hidden"
     setTimeout(function() {
         if (player.hp > 0) {
             player.hp -= currentEnemy.dmg
@@ -199,6 +200,7 @@ function enemyChoice() {
         if (player.alive !== false){
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
             fightButtonEl.disabled = false
+            fightButtonEl.style.visibility = "visible"
         }
         }
     }, 1500)
