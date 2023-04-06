@@ -347,12 +347,9 @@ function checkIfWin(){
 }
 
 function toggleMuted1() {
-    if (startScreenEl.style.display !== 'none'){
-        playMainMenu()
-    }
-    if (mainMenuMusic.currentTime > 1){
+
     mainMenuMusic.muted = !mainMenuMusic.muted
-    }
+    playMainMenu()
     firstBattleMusic.muted = !firstBattleMusic.muted
     winningTheme.muted = !winningTheme.muted
     gameOverMusic.muted = !gameOverMusic.muted
