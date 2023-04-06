@@ -27,11 +27,11 @@ let currentEnemy = enemies.find(function(enemy) {
 })
 console.log("INITIAL CURRENT ENEMY",currentEnemy)
 
-let continueButtonTimeout = setTimeout(() => {
-    if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
-    createContinueButtonEl.style.visibility = 'visible';
-    }
-}, 7500);
+// let continueButtonTimeout = setTimeout(() => {
+//     if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
+//     createContinueButtonEl.style.visibility = 'visible';
+//     }
+// }, 7500);
 
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
@@ -139,6 +139,8 @@ forward1ButtonEl.innerText = "Forward!"
 
 const typeWriter1Animation = document.querySelector('.anim-typewriter')
 const typeWriter2Animation = document.querySelector('.anim-typewriter2')
+const typeWriter3Animation = document.querySelector('.anim-typewriter3')
+const typeWriter4Animation = document.querySelector('.anim-typewriter4')
 //need to make a mute audio button
 /*----------------------------- Event Listeners ------------------------------*/
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
@@ -165,7 +167,7 @@ const player = {hp: 50, turn: 1, get dmg() {
 function init() {
     startGameMenu()
     win = false
-    player.hp = 1
+    player.hp = 100
     currentEnemy.hp = 10
     turn = 1
     player.stars = 0
@@ -245,7 +247,7 @@ function playerChoice() {
             if (firstBattleMusic.currentTime > 1) {
             createKnightImg.style.visibility = 'visible'
             }
-        }, 1400)
+        }, 1350)
     }
     if (player.alive !== false) {
         combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
@@ -254,7 +256,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 10)
+    currentEnemy.dmg = Math.floor(Math.random() * 1)
     console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
@@ -322,7 +324,10 @@ function gameOverOff() {
 
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
-        stoneGolemGif.classList.add('fadeOut')
+        setTimeout(() => {
+            stoneGolemGif.classList.add('fadeOut')
+            
+        }, 1200);
         
         
         
@@ -341,15 +346,16 @@ function checkIfWin(){
         battleScreenEl.style.visibility = "visible"
         battleScreenEl.append(forward1ButtonEl)
         forward1ButtonEl.style.visibility = "visible"
-        }, 1400);
+        }, 3500);
     }
     return 
 }
 
 function toggleMuted1() {
-
     mainMenuMusic.muted = !mainMenuMusic.muted
-    playMainMenu()
+    if (startScreenEl.style.display !== "none") {
+        playMainMenu()  
+    }
     firstBattleMusic.muted = !firstBattleMusic.muted
     winningTheme.muted = !winningTheme.muted
     gameOverMusic.muted = !gameOverMusic.muted
@@ -379,6 +385,7 @@ function resetButton() {
     battleScreenEl.style.display = 'inline'
 
     createContinueButtonEl.style.visibility = 'hidden'
+    createContinueButton2El.style.visibility = 'hidden'
 
     skipButtonEl.style.visibility = 'hidden'
     resetButtonEl.style.visibility = 'hidden'
@@ -521,20 +528,22 @@ gameOverScreenEl.append(gameOverResetButtonEl)
 function disableFirstBattleScreen(evnt) {
     battleScreenEl.style.display = "none"
     updateEnemy()
+    console.log(currentEnemy)
     firstBattleMusic.pause()
     firstBattleMusic.currentTime = 0
     secondMessageScreenEl.classList.add('play-animation2')
     resetSecondAnimationScreen()
-    secondMessageScreenEl.append(createContinueButton2El)
-    createContinueButton2El.style.visibility = 'hidden'
+    // secondMessageScreenEl.append(createContinueButton2El)
+    // createContinueButton2El.style.visibility = 'visible'
     secondMessageScreenEl.append(skipButton2El)
     skipButton2El.style.visibility = 'visible'
     secondMessageScreenEl.append(resetButtonEl)
     resetButtonEl.style.visibility = 'visible'
     secondMessageScreenEl.append(muteButton1El)
-    secondMessageScreenEl.addEventListener("ended", function() { 
+    firstMessageScreenMusic.addEventListener("ended", function() { 
         secondMessageScreenEl.append(createContinueButton2El)   
         createContinueButton2El.style.visibility = 'visible'
+        console.log(createContinueButton2El.style.visibility)
         console.log("animation end")
         })
     firstMessageScreenMusic.play()
