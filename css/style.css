@@ -285,7 +285,7 @@ html{
     z-index: inherit;
 }
 
-.combat-log {
+.combat-log , .combat-log2 {
     display: flex;
     flex-direction: column;
     position: fixed;
