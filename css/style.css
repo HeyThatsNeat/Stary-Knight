@@ -319,7 +319,7 @@ html{
 }
 
 /* SHOWS UP AFTER ENEMY IS DEFEATED */
-.continue-after-enemy1-button {
+.forward1-button {
     position: absolute;
     top: 75%;
     left: 50%;

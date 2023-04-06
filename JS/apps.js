@@ -122,9 +122,9 @@ const gameOverResetButtonEl = document.createElement("button")
 gameOverResetButtonEl.className = "game-over-reset-button"
 gameOverResetButtonEl.innerText = "Try Again?"
 
-const continueAfterEnemy1ButtonEl = document.createElement("button")
-continueAfterEnemy1ButtonEl.className = "continue-after-enemy1-button"
-continueAfterEnemy1ButtonEl.innerText = "Forward!"
+const forward1ButtonEl = document.createElement("button")
+forward1ButtonEl.className = "forward1-button"
+forward1ButtonEl.innerText = "Forward!"
 
 const typeWriter1Animation = document.querySelector('.anim-typewriter')
 const typeWriter2Animation = document.querySelector('.anim-typewriter2')
@@ -138,7 +138,7 @@ resetButtonEl.addEventListener("click", resetButton)
 gameOverResetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
-continueAfterEnemy1ButtonEl.addEventListener("click", disableFirstBattleScreen)
+forward1ButtonEl.addEventListener("click", disableFirstBattleScreen)
 
 
 /*-------------------------------- Objects -----------------------------------*/
@@ -312,7 +312,8 @@ function checkIfWin(){
         battleScreenEl.append(youWinMessageEl)
         youWinMessageEl.style.visibility = "visible"
         battleScreenEl.style.visibility = "visible"
-        battleScreenEl.append(continueAfterEnemy1ButtonEl)
+        battleScreenEl.append(forward1ButtonEl)
+        forward1ButtonEl.style.visibility = "visible"
     }
     return 
 }
@@ -365,6 +366,7 @@ function resetButton() {
     combatLogEl.style.visibility = 'hidden'
     combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
+    forward1ButtonEl.style.visibility = "hidden"
 
     createKnightImg.classList.remove('fadeOut')
     stoneGolemGif.classList.remove('fadeOut')
@@ -485,8 +487,6 @@ function disableFirstMessageScreen(evnt) {
     firstMessageScreenMusic.pause()
     firstMessageScreenMusic.currentTime = 0
     evnt.stopPropagation()
-
-    //when the enemy dies, add a forward button
 }
 
 // GAME OVER SCREEN
