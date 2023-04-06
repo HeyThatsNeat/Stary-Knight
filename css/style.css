@@ -460,3 +460,36 @@ html{
     border-radius: 5px;
     z-index: inherit;
 }
+
+.reset-button2 {
+    position: absolute;
+    top: 15%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #8336ad;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: inherit;
+}
+
+.skip-button2 {
+    position: absolute;
+    top: 115%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #ad3636;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    visibility: visible;
+    z-index: inherit;
+}

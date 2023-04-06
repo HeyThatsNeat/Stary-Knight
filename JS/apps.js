@@ -242,7 +242,7 @@ function playerChoice() {
         gameOver()
         setTimeout(() => {
             createKnightAttackImg.style.visibility = "hidden"
-            if (currentEnemy.hp > 0) {
+            if (firstBattleMusic.currentTime > 1) {
             createKnightImg.style.visibility = 'visible'
             }
         }, 1400)
@@ -323,8 +323,6 @@ function gameOverOff() {
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         stoneGolemGif.classList.add('fadeOut')
-        createKnightAttackImg.style.visibility = "hidden"
-        createKnightImg.style.visibility = "visible"
         winningTheme.play()
         winningTheme.volume = 0.08
         firstBattleMusic.pause()
@@ -335,6 +333,9 @@ function checkIfWin(){
         battleScreenEl.style.visibility = "visible"
         battleScreenEl.append(forward1ButtonEl)
         forward1ButtonEl.style.visibility = "visible"
+        setTimeout(() => {
+            createKnightImg.style.visibility = "visible"
+        }, 1400);
     }
     return 
 }
