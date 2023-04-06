@@ -74,6 +74,9 @@ const createFirstBattleImg = document.createElement("img")
 const createKnightImg = document.createElement("img")
 createKnightImg.className = "knight"
 
+const createKnightAttackImg = document.createElement("img")
+createKnightAttackImg.className = "knight-attack"
+
 
 const battleScreenEl = document.querySelector(".battle-screen")
 
@@ -233,8 +236,16 @@ function playerChoice() {
 
     if (player.hp > 0){
         currentEnemy.hp -= player.dmg
+        createKnightImg.style.visibility = 'hidden'
+        createKnightAttackImg.style.visibility = "visible"
         combatLogEl.innerHTML += `• The player did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
         gameOver()
+        setTimeout(() => {
+            createKnightAttackImg.style.visibility = "hidden"
+            if (currentEnemy.hp > 0) {
+            createKnightImg.style.visibility = 'visible'
+            }
+        }, 1400)
     }
     if (player.alive !== false) {
         combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
@@ -367,6 +378,7 @@ function resetButton() {
 
     createFirstBattleImg.style.visibility = 'hidden'
     createKnightImg.style.visibility = 'hidden'
+    createKnightAttackImg.style.visibility = 'hidden'
     stoneGolemGif.style.visibility = 'hidden'
     fightButtonEl.disabled = false
     fightButtonEl.style.visibility = 'hidden'
@@ -471,8 +483,11 @@ function disableFirstMessageScreen(evnt) {
     battleScreenEl.append(createFirstBattleImg)
     createFirstBattleImg.style.visibility = 'visible'
     createKnightImg.src="../css/knight-animation.gif"
+    createKnightAttackImg.src="../css/knight-attack.gif"
     battleScreenEl.append(createKnightImg)
+    battleScreenEl.append(createKnightAttackImg)
     createKnightImg.style.visibility = 'visible'
+    createKnightAttackImg.style.visibility = "hidden"
     stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
     battleScreenEl.append(stoneGolemGif)
     stoneGolemGif.style.visibility = 'visible'

@@ -216,6 +216,16 @@ html{
     animation-play-state: paused;
 }
 
+.knight-attack {
+    position: fixed;
+    margin:0;
+    top: 32vmin;;
+    left: 51vmin;
+    width: 10%;
+    padding: 0;
+    width: 25%;
+}
+
 .golem {
     position: fixed;
     margin:0;
