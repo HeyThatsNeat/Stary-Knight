@@ -133,7 +133,7 @@ html{
 }
 
 
-.line-1 {
+.line-1 , .line-3 {
     position: fixed;
     top: 50%;  
     width: 24em;
@@ -146,7 +146,7 @@ html{
     transform: translateY(-50%);    
 }
 
-.line-2{
+.line-2 , .line-4 {
     position: fixed;
     top: 55%;  
     width: 24em;
@@ -160,20 +160,22 @@ html{
 }
 
   /* Animation */
-.anim-typewriter {
+.anim-typewriter , .anim-typewriter3 {
     animation: typewriter 4s steps(44) 1s 1 normal both,
     blinkTextCursor 0ms steps(44) infinite normal;
     animation-play-state: paused;
 }
 
-.anim-typewriter2{
+.anim-typewriter2, .anim-typewriter4 {
     animation: typewriter 4s steps(44) 4.5s 1 normal both,
     blinkTextCursor 0ms steps(44) infinite normal;
     animation-play-state: paused;
 }
 
 .play-animation .anim-typewriter,
-.play-animation .anim-typewriter2 {
+.play-animation .anim-typewriter2,
+.play-animation2 .anim-typewriter3,
+.play-animation2 .anim-typewriter4 {
     animation-play-state: running;
 }
 
@@ -430,6 +432,18 @@ html{
 }
 
 /* SECOND MESSAGE SCREEN */
+
+.second-message{
+    max-width: 100%;
+    height: calc(100vh - 8em);
+    padding: 4em;
+    color: rgba(249, 249, 249, 0.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #191919;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .continue-button2 {
     position: absolute;

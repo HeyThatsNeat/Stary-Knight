@@ -166,7 +166,7 @@ function init() {
     startGameMenu()
     win = false
     player.hp = 50
-    currentEnemy.hp = 30
+    currentEnemy.hp = 10
     turn = 1
     player.stars = 0
     player.alive = true
@@ -254,7 +254,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 60)
+    currentEnemy.dmg = Math.floor(Math.random() * 1)
     console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
@@ -323,6 +323,8 @@ function gameOverOff() {
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         stoneGolemGif.classList.add('fadeOut')
+        createKnightAttackImg.style.visibility = "hidden"
+        createKnightImg.style.visibility = "visible"
         winningTheme.play()
         winningTheme.volume = 0.08
         firstBattleMusic.pause()
@@ -369,6 +371,7 @@ function resetButton() {
 
     startScreenEl.style.display = 'inline'
     firstMessageScreenEl.style.display = 'flex'
+    secondMessageScreenEl.style.display = 'flex'
     battleScreenEl.style.display = 'inline'
 
     createContinueButtonEl.style.visibility = 'hidden'
@@ -525,6 +528,14 @@ function disableFirstBattleScreen(evnt) {
     secondMessageScreenEl.append(resetButtonEl)
     resetButtonEl.style.visibility = 'visible'
     secondMessageScreenEl.append(muteButton1El)
+    secondMessageScreenEl.addEventListener("ended", function() { 
+        secondMessageScreenEl.append(createContinueButton2El)   
+        createContinueButton2El.style.visibility = 'visible'
+        console.log("animation end")
+        })
+    firstMessageScreenMusic.play()
+    winningTheme.pause()
+    winningTheme.currentTime = 0
     evnt.stopPropagation()
     // dont forget to update the reset button!!
 }
