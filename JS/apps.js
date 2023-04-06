@@ -59,6 +59,10 @@ const firstMessageScreenEl = document.querySelector(".first-message")
 
 const secondMessageScreenEl = document.querySelector(".second-message")
 
+const skipButton2El = document.createElement("button")
+skipButton2El.className = "skip-button2"
+skipButton2El.innerText = "Skip"
+
 const menuTitleEl = document.createElement("h1")
 menuTitleEl.className = "menu-title"
 menuTitleEl.innerText = "Starry Knight"
@@ -109,6 +113,10 @@ bodyEl.appendChild(gameOverScreenEl)
 const resetButtonEl = document.createElement('button')
 resetButtonEl.className = "reset-button"
 resetButtonEl.innerText = "Restart?"
+
+const resetButton2El = document.createElement('button')
+resetButton2El.className = "reset-button2"
+resetButton2El.innerText = "Restart?"
 
 const muteButton1El = document.createElement("button")
 muteButton1El.className = "mute-button"
@@ -368,6 +376,9 @@ function resetButton() {
     youWinMessageEl.style.visibility = "hidden"
     forward1ButtonEl.style.visibility = "hidden"
 
+    skipButton2El.style.visibility = 'hidden'
+    resetButton2El.style.visibility = 'hidden'
+
     createKnightImg.classList.remove('fadeOut')
     stoneGolemGif.classList.remove('fadeOut')
     
@@ -494,8 +505,11 @@ function disableFirstBattleScreen(evnt) {
     resetSecondAnimationScreen()
     secondMessageScreenEl.append(createContinueButton2El)
     createContinueButton2El.style.visibility = 'hidden'
-    // append skipbutton2 that you have to make to the 2nd message screen next
-
+    secondMessageScreenEl.append(skipButton2El)
+    skipButton2El.style.visibility = 'visible'
+    secondMessageScreenEl.append(resetButtonEl)
+    resetButtonEl.style.visibility = 'visible'
+    secondMessageScreenEl.append(muteButton1El)
     evnt.stopPropagation()
     // dont forget to update the reset button!!
 }
