@@ -69,6 +69,7 @@ menuTitleEl.innerText = "Starry Knight"
 
 
 const createFirstBattleImg = document.createElement("img")
+createFirstBattleImg.className = "first-battle-img"
 
 
 const createKnightImg = document.createElement("img")
@@ -493,7 +494,7 @@ function disableMainScreen(evnt) {
 // HAPPENING ON CLICK AND SWITCHES TO BATTLE SCREEN
 function disableFirstMessageScreen(evnt) {
     firstMessageScreenEl.style.display = 'none'
-    createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
+    createFirstBattleImg.src="../css/ancient_gate_by_waltjan_deb9n6i-fullview (1).jpg"
     // createFirstBattleImg.style.visibility = "visible"
     battleScreenEl.append(createFirstBattleImg)
     createFirstBattleImg.style.visibility = 'visible'
