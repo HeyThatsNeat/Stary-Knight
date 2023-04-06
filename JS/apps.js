@@ -99,7 +99,7 @@ gameOverScreenEl.id = "overlay"
 
 
 const gameOverMessageEl = document.createElement("p")
-gameOverMessageEl.id = "game-over-message"
+gameOverMessageEl.className = "game-over-message"
 gameOverMessageEl.innerHTML = "GAME <br>OVER"
 gameOverScreenEl.append(gameOverMessageEl)
 
@@ -235,7 +235,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 3)
+    currentEnemy.dmg = Math.floor(Math.random() * 60)
     console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
@@ -287,15 +287,13 @@ function gameOver() {
     }
     console.log(currentEnemy)
 }
-    // show a game over page or message 
-    // return back to the main menu
 
 
 function gameOverOn() {
     gameOverScreenEl.style.display = "block";
     gameOverScreenEl.style.visibility = 'visible'
     gameOverScreenEl.style.zIndex = 5
-    gameOverMessageEl.classList.add("play-game-over-animation")
+    gameOverMessageEl.classList.add('play-game-over-animation')
 }
 
 function gameOverOff() {
@@ -419,7 +417,7 @@ function playMainMenu() {
     mainMenuMusic.volume = .1
 }
 
-// HAPPENING ON CLICK
+// IN INIT
 function startGameMenu() {
     createStartMenuImg.src="../css/Wallpaper-Shovel-Knight-Video-Games-Pixel-Art-Retro-Gam50.jpg"
     startScreenEl.append(createStartMenuImg)
@@ -431,7 +429,7 @@ function startGameMenu() {
 
 
 
-// HAPPENING ON CLICK
+// HAPPENING ON CLICK & SWITCHES TO THE FIRST MESSAGE SCREEN
 function disableMainScreen(evnt) {
     startScreenEl.style.display = 'none'
     mainMenuMusic.pause() 
@@ -450,19 +448,11 @@ function disableMainScreen(evnt) {
         createContinueButtonEl.style.visibility = 'visible'
         console.log("animation end")
         })
-    // if (startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
-    //     continueButtonTimeout = setTimeout(() => {
-    //         if(startScreenEl.style.display === "none" && mainMenuMusic.paused && createContinueButtonEl.style.visibility === 'hidden') {
-    //         createContinueButtonEl.style.visibility = 'visible';
-    //         }
-    //     }, 7500);
-    // }
-    
     firstMessageScreenMusic.play()    
     evnt.stopPropagation()
 }
 
-// HAPPENING ON CLICK
+// HAPPENING ON CLICK AND SWITCHES TO BATTLE SCREEN
 function disableFirstMessageScreen(evnt) {
     firstMessageScreenEl.style.display = 'none'
     createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
@@ -494,7 +484,7 @@ function disableFirstMessageScreen(evnt) {
 gameOverScreenEl.append(gameoverMuteButtonEl)
 gameOverScreenEl.append(gameOverResetButtonEl)
 
-// HAPPENING ON CLICK
+// HAPPENING ON CLICK AND SWITCHES OVER TO 2ND MESSAGE SCREEN
 function disableFirstBattleScreen(evnt) {
     battleScreenEl.style.display = "none"
     updateEnemy()

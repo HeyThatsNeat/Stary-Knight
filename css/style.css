@@ -206,7 +206,7 @@ html{
 .knight {
     position: fixed;
     margin:0;
-    top: 55vmin;;
+    top: 40vmin;;
     left: 65vmin;
     width: 10%;
     padding: 0;
@@ -219,9 +219,9 @@ html{
 .golem {
     position: fixed;
     margin:0;
-    top: 55vmin;
-    left: 130vmin;
-    width: 10%;
+    top: 0vmin;
+    left: 100vmin;
+    width: 50%;
     padding: 0;
     animation-name: fadeOut;
     -webkit-animation-duration: 3s;animation-duration: 3s;
@@ -352,7 +352,7 @@ html{
     cursor: default;
 }
 
-#game-over-message {
+.game-over-message {
     position: absolute;
     font-family: 'LVDC Game Over 2', sans-serif;
     top: 20%;
@@ -365,13 +365,13 @@ html{
     line-height: 17vmin;
     -webkit-text-stroke: 4px #191919;
     text-shadow: -8px -10px #191919;
-    animation-duration: 3s;
+    animation-duration: 3.7s;
     animation-name: slidein;
-    animation-play-state: running;
+    animation-play-state: paused;
 }
 
-.play-game-over-animation #game-over-message {
-    animation-play-state: paused;
+.play-game-over-animation {
+    animation-play-state: running;
 }
 
 @keyframes slidein {
