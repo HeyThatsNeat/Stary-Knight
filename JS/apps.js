@@ -208,7 +208,9 @@ function enemyChoice() {
         if (player.alive !== false){
             combatLogEl.innerHTML +=  `• It's the player's turn!<br>`
             fightButtonEl.disabled = false
+            if (firstBattleMusic.currentTime > 1) {
             fightButtonEl.style.visibility = "visible"
+            }
             console.log("SHOWING",fightButtonEl.style.visibility)
         }
         }
@@ -360,9 +362,9 @@ function resetButton() {
     createFirstBattleImg.style.visibility = 'hidden'
     createKnightImg.style.visibility = 'hidden'
     stoneGolemGif.style.visibility = 'hidden'
+    fightButtonEl.disabled = false
     fightButtonEl.style.visibility = 'hidden'
     console.log(fightButtonEl.style.visibility)
-    fightButtonEl.style.zIndex = 1
     combatLogEl.style.visibility = 'hidden'
     combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
@@ -373,7 +375,6 @@ function resetButton() {
     
     gameOverOff()
     
-    fightButtonEl.disabled = false
 
     for (let i = 0; i < enemies.length; i++) {
         enemies[i].stars = i + 1  
