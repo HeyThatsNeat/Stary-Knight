@@ -16,7 +16,7 @@ Starry Knight is about a Knight who has lost all their stars to the forces of ev
 ---
 
 ## Credits
-* Here is a list of [attributions]("https://github.com/HeyThatsNeat/Stary-Knight/blob/main/attributions.md") that played a big part in this project.
+* Here is a list of [attributions](https://github.com/HeyThatsNeat/Stary-Knight/blob/main/attributions.md) that played a big part in this project.
 
 ---
 
