@@ -383,6 +383,7 @@ function resetButton() {
     firstMessageScreenEl.style.display = 'flex'
     secondMessageScreenEl.style.display = 'flex'
     battleScreenEl.style.display = 'inline'
+    secondMessageScreenEl.style.display = 'flex'
 
     createContinueButtonEl.style.visibility = 'hidden'
     createContinueButton2El.style.visibility = 'hidden'
@@ -551,6 +552,39 @@ function disableFirstBattleScreen(evnt) {
     winningTheme.currentTime = 0
     evnt.stopPropagation()
     // dont forget to update the reset button!!
+}
+
+// HAPPENING ON CLICK AND SWITCHES OVER TO 2ND BATTLE SCREEN
+function disableSecondMessageScreen(evnt) {
+    // firstMessageScreenEl.style.display = 'none'
+    secondMessageScreenEl.style.display = 'none'
+    // createFirstBattleImg.src="../css/CrystalCave1-1920x1080-2a8443ca448c40ef77c4da5d220c5e23.jpg"
+    createSecondBattleImg.src="../css/"
+    // // createFirstBattleImg.style.visibility = "visible"
+    // battleScreenEl.append(createFirstBattleImg)
+    // createFirstBattleImg.style.visibility = 'visible'
+    // createKnightImg.src="../css/knight-animation.gif"
+    // createKnightAttackImg.src="../css/knight-attack.gif"
+    // battleScreenEl.append(createKnightImg)
+    // battleScreenEl.append(createKnightAttackImg)
+    // createKnightImg.style.visibility = 'visible'
+    // createKnightAttackImg.style.visibility = "hidden"
+    // stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
+    // battleScreenEl.append(stoneGolemGif)
+    // stoneGolemGif.style.visibility = 'visible'
+    // battleScreenEl.append(fightButtonEl)
+    // fightButtonEl.style.visibility = 'visible'
+    // console.log(fightButtonEl.style.visibility)
+    // firstBattleMusic.volume = 0.04
+    // firstBattleMusic.play()
+    // firstBattleMusic.loop = true
+    // battleScreenEl.append(combatLogEl)
+    // combatLogEl.style.visibility = 'visible'
+    // battleScreenEl.append(resetButtonEl)
+    // battleScreenEl.append(muteButton1El)
+    // firstMessageScreenMusic.pause()
+    // firstMessageScreenMusic.currentTime = 0
+    // evnt.stopPropagation()
 }
 //   level3Render() //to be implemented
 //game over not animating on the first run and toggle button doesnt keep everything turned on after you hit it to play music onload
