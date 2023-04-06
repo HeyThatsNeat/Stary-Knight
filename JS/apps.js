@@ -233,7 +233,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 52)
+    currentEnemy.dmg = Math.floor(Math.random() * 3)
     console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
@@ -269,12 +269,13 @@ function aliveStatus() {
     return
 }
 
+
 function gameOver() {
-    if (player.hp < 1) {
+    if (player.hp < 1 || player.alive === false) {
         setTimeout(() => {
             gameOverOn()
-            }, 1500)
-        console.log("ALIVE STATUS",player.hp)
+            }, 4000)
+        createKnightImg.classList.add('fadeOut')
         firstBattleMusic.pause()
         gameOverMusic.play()
         gameOverMusic.volume = 0.5
@@ -302,6 +303,7 @@ function gameOverOff() {
 
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
+        stoneGolemGif.classList.add('fadeOut')
         winningTheme.play()
         winningTheme.volume = 0.08
         firstBattleMusic.pause()
@@ -363,6 +365,9 @@ function resetButton() {
     combatLogEl.style.visibility = 'hidden'
     combatLogEl.innerHTML = ""
     youWinMessageEl.style.visibility = "hidden"
+
+    createKnightImg.classList.remove('fadeOut')
+    stoneGolemGif.classList.remove('fadeOut')
     
     gameOverOff()
     
@@ -504,3 +509,6 @@ function disableFirstBattleScreen(evnt) {
     // dont forget to update the reset button!!
 }
 //   level3Render() //to be implemented
+//game over not animating on the first run and toggle button doesnt keep everything turned on after you hit it to play music onload
+
+//dont forget to fix the enemy damage and the player hp

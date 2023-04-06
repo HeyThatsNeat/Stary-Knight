@@ -210,6 +210,10 @@ html{
     left: 65vmin;
     width: 10%;
     padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
 }
 
 .golem {
@@ -219,7 +223,28 @@ html{
     left: 130vmin;
     width: 10%;
     padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
 }
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    animation-play-state: running;
+}
+
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
 
 .fight-button {
     position: absolute;
