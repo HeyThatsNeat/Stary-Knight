@@ -165,7 +165,7 @@ const player = {hp: 50, turn: 1, get dmg() {
 function init() {
     startGameMenu()
     win = false
-    player.hp = 50
+    player.hp = 1
     currentEnemy.hp = 10
     turn = 1
     player.stars = 0
@@ -254,7 +254,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 1)
+    currentEnemy.dmg = Math.floor(Math.random() * 10)
     console.log("FUNCTION DAMAGE WITH MATH FLOOR",currentEnemy.dmg)
 }
 
@@ -323,18 +323,24 @@ function gameOverOff() {
 function checkIfWin(){
     if(currentEnemy.alive === false && currentEnemy.stars === 0) {
         stoneGolemGif.classList.add('fadeOut')
-        winningTheme.play()
-        winningTheme.volume = 0.08
-        firstBattleMusic.pause()
-        firstBattleMusic.currentTime = 0
+        
+        
+        
+        
         fightButtonEl.style.visibility = "hidden"
-        battleScreenEl.append(youWinMessageEl)
+        
+        
+        setTimeout(() => {
+            createKnightImg.style.visibility = "visible"
+            winningTheme.play()
+            winningTheme.volume = 0.08
+            firstBattleMusic.pause()
+            firstBattleMusic.currentTime = 0
+            battleScreenEl.append(youWinMessageEl)
         youWinMessageEl.style.visibility = "visible"
         battleScreenEl.style.visibility = "visible"
         battleScreenEl.append(forward1ButtonEl)
         forward1ButtonEl.style.visibility = "visible"
-        setTimeout(() => {
-            createKnightImg.style.visibility = "visible"
         }, 1400);
     }
     return 
