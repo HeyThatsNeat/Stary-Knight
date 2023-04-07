@@ -571,30 +571,42 @@ html{
 
  /* .skip-button3  moved to .skip-button */
 
-    /* THIRD BATTLE SCREEN */
-    .knight3 {
-        position: fixed;
-        margin:0;
-        top: 44vmin;;
-        left: 62vmin;
-        width: 10%;
-        padding: 0;
-        animation-name: fadeOut;
-        -webkit-animation-duration: 3s;animation-duration: 3s;
-        -webkit-animation-fill-mode: both;animation-fill-mode: both;
-        animation-play-state: paused;
-    }
+/* THIRD BATTLE SCREEN */
+.knight3 {
+    position: fixed;
+    margin:0;
+    top: 44vmin;;
+    left: 62vmin;
+    width: 10%;
+    padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
+}
 
-    .knight3-attack {
-        position: fixed;
-        margin:0;
-        top: 43vmin;;
-        left: 48vmin;
-        width: 10%;
-        padding: 0;
-        width: 25%;
-    }
+.knight3-attack {
+    position: fixed;
+    margin:0;
+    top: 43vmin;;
+    left: 48vmin;
+    width: 10%;
+    padding: 0;
+    width: 25%;
+}
 
+.fire-worm{
+    position: fixed;
+    margin:0;
+    top: 23vmin;
+    left: 100vmin;
+    width: 40%;
+    padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
+}
 
 
 

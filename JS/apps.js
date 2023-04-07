@@ -1,9 +1,9 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "enemy1", hp: 5, turn: -1, dmg: 0, stars: 1, alive: true}, 
+    {name: "Stone Golem", hp: 5, turn: -1, dmg: 0, stars: 1, alive: true}, 
     {name: "Bringer of Death", hp: 5, turn: -1, dmg: 0, stars: 2, alive: true}, 
-    {name: "enemy3", hp: 5, turn: -1, dmg: 0, stars: 3, alive: true}, 
+    {name: "Fire Worm", hp: 5, turn: -1, dmg: 0, stars: 3, alive: true}, 
     {name: "enemy4", hp: 5, turn: -1, dmg: 0, stars: 4, alive: true}, 
     {name: "enemy5", hp: 5, turn: -1, dmg: 0, stars: 5, alive: true}
 ]
@@ -104,6 +104,8 @@ const stoneGolemGif = document.createElement("img")
 stoneGolemGif.className = "golem"
 const bringerOfDeathGif = document.createElement("img")
 bringerOfDeathGif.classList = "bringer-of-death"
+const fireWormGif = document.createElement("img")
+fireWormGif.classList = "fire-worm"
 
 const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
@@ -444,22 +446,24 @@ function checkIfWin(){
     }
     if(currentEnemy.alive === false && currentEnemy.stars === 0 && thirdBattleMusic.currentTime > 0.05) {
         setTimeout(() => {
-            //ADD ENEMY HERE .classList.add('fadeOut')
+            fireWormGif.classList.add('fadeOut')
         }, 1200)
         // YOU MIGHT HAVE TO MAKE A 2ND FIGHT BUTTON IF THIS ONE IS GIVING YOU PROBLEMS
         fightButtonEl.style.visibility = "hidden"
 
         setTimeout(() => {
-            createKnight3Img.style.visibility = "visible"
-            winningTheme.play()
-            winningTheme.volume = 0.08
-            thirdBattleMusic.pause()
-            thirdBattleMusic.currentTime = 0
-            battleScreen3El.append(youWinMessageEl)
-            youWinMessageEl.style.visibility = "visible"
-            battleScreen3El.style.visibility = "visible"
-            battleScreen3El.append(forward3ButtonEl)
-            forward3ButtonEl.style.visibility = "visible"
+            if (thirdBattleMusic.currentTime > 0.05) {
+                createKnight3Img.style.visibility = "visible"
+                winningTheme.play()
+                winningTheme.volume = 0.08
+                thirdBattleMusic.pause()
+                thirdBattleMusic.currentTime = 0
+                battleScreen3El.append(youWinMessageEl)
+                youWinMessageEl.style.visibility = "visible"
+                battleScreen3El.style.visibility = "visible"
+                battleScreen3El.append(forward3ButtonEl)
+                forward3ButtonEl.style.visibility = "visible"
+            }
         }, 3500)
     }
     return 
@@ -544,6 +548,7 @@ function resetButton() {
 
     stoneGolemGif.style.visibility = 'hidden'
     bringerOfDeathGif.style.visibility = 'hidden'
+    fireWormGif.style.visibility = 'hidden'
 
     fightButtonEl.disabled = false
     fightButtonEl.style.visibility = 'hidden'
@@ -567,6 +572,7 @@ function resetButton() {
     createKnight3Img.classList.remove('fadeOut')
     stoneGolemGif.classList.remove('fadeOut')
     bringerOfDeathGif.classList.remove('fadeOut')
+    fireWormGif.classList.remove('fadeOut')
     
     gameOverOff()
     
@@ -808,11 +814,11 @@ function disableThirdMessageScreen(evnt) {
     // createKnight2AttackImg.style.visibility = "hidden"
     createKnight3AttackImg.style.visibility = "hidden"
     // bringerOfDeathGif.src="../css/bringer-of-death.gif"
-
+    fireWormGif.src="../css/fire-worm.gif"
     // battleScreen2El.append(bringerOfDeathGif)
-    battleScreen3El.append()
+    battleScreen3El.append(fireWormGif)
     // bringerOfDeathGif.style.visibility = 'visible'
-
+    fireWormGif.style.visibility = 'visible'
     // battleScreen2El.append(fightButtonEl)
     battleScreen3El.append(fightButtonEl)
     // fightButtonEl.style.visibility = 'visible'
