@@ -684,7 +684,7 @@ function beatTheGame() {
         player.win = true
     setTimeout(() => {
         wonGameSong.play() 
-        wonGameSong.volume = 0.2
+        wonGameSong.volume = 0.1
         wonGameSong.loop = true
         youWonTheGameScreenEl.style.display = "block"
         youWonTheGameScreenEl.style.visibility = 'visible'
