@@ -71,7 +71,7 @@ html{
     overflow: hidden;
 }
 
-.continue-button , .continue-button2 {
+.continue-button , .continue-button2 .continue-button3{
     position: absolute;
     top: 75%;
     left: 50%;
@@ -105,7 +105,7 @@ html{
 }
 
 
-.skip-button , .skip-button2 {
+.skip-button , .skip-button2 , .skip-button3 {
     position: absolute;
     top: 115%;
     left: 95%;
@@ -164,13 +164,13 @@ html{
 }
 
   /* Animation */
-.anim-typewriter , .anim-typewriter3 {
+.anim-typewriter , .anim-typewriter3 , .anim-typewriter5 {
     animation: typewriter 4s steps(44) 1s 1 normal both,
     blinkTextCursor 0ms steps(44) infinite normal;
     animation-play-state: paused;
 }
 
-.anim-typewriter2, .anim-typewriter4 {
+.anim-typewriter2, .anim-typewriter4, .anim-typewriter6 {
     animation: typewriter 4s steps(44) 4.5s 1 normal both,
     blinkTextCursor 0ms steps(44) infinite normal;
     animation-play-state: paused;
@@ -179,7 +179,9 @@ html{
 .play-animation .anim-typewriter,
 .play-animation .anim-typewriter2,
 .play-animation2 .anim-typewriter3,
-.play-animation2 .anim-typewriter4 {
+.play-animation2 .anim-typewriter4,
+.play-animation3 .anim-typewriter5,
+.play-animation3 .anim-typewriter6 {
     animation-play-state: running;
 }
 
@@ -322,10 +324,11 @@ html{
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     color: white;
+    word-spacing: 30px;
     font-size: 75px;
 }
 
-.mute-button {
+.mute-button , .mute-button2 {
     position: absolute;
     top: 10%;
     left: 80%;
@@ -556,3 +559,7 @@ html{
     animation-name: fadeOut;
     animation-play-state: running;
 }
+
+ /* THIRD MESSAGE SCREEN */
+
+ /* .skip-button3  moved to .skip-button */
