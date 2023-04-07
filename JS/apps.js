@@ -461,7 +461,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 1000)
+    currentEnemy.dmg = Math.floor(Math.random() * 4)
 }
 
 // IN PLAYER OBJECT
