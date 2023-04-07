@@ -2,7 +2,7 @@
 
 const enemies = [
     {name: "enemy1", hp: 20, turn: -1, dmg: 0, stars: 1, alive: true}, 
-    {name: "enemy2", hp: 20, turn: -1, dmg: 0, stars: 2, alive: true}, 
+    {name: "Bringer of Death", hp: 20, turn: -1, dmg: 0, stars: 2, alive: true}, 
     {name: "enemy3", hp: 20, turn: -1, dmg: 0, stars: 3, alive: true}, 
     {name: "enemy4", hp: 20, turn: -1, dmg: 0, stars: 4, alive: true}, 
     {name: "enemy5", hp: 20, turn: -1, dmg: 0, stars: 5, alive: true}
@@ -94,6 +94,8 @@ const battleScreen2El = document.querySelector(".battle-screen2")
 
 const stoneGolemGif = document.createElement("img")
 stoneGolemGif.className = "golem"
+const bringerOfDeathGif = document.createElement("img")
+bringerOfDeathGif.classList = "bringer-of-death"
 
 const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
@@ -171,7 +173,6 @@ gameOverResetButtonEl.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
 forward1ButtonEl.addEventListener("click", disableFirstBattleScreen)
-
 // forward2ButtonEl.addEventListener("click", disableSecondBattleScreen)
 
 /*-------------------------------- Functions ---------------------------------*/
@@ -333,6 +334,7 @@ function gameOver() {
         createKnightImg.classList.add('fadeOut')
         createKnight2Img.classList.add('fadeOut')
         firstBattleMusic.pause()
+        secondBattleMusic.pause()
         gameOverMusic.play()
         gameOverMusic.volume = 0.5
         gameOverMusic.loop = true
@@ -381,7 +383,7 @@ function checkIfWin(){
     // FOR SECOND BATTLE
     if(currentEnemy.alive === false && currentEnemy.stars === 0 && secondBattleMusic.currentTime > 0.05) {
             setTimeout(() => {
-                //INSERT 2nd ENEMEY HERE
+                bringerOfDeathGif.classList.add('fadeOut')
             }, 1200)
             // YOU MIGHT HAVE TO MAKE A 2ND FIGHT BUTTON IF THIS ONE IS GIVING YOU PROBLEMS
             fightButtonEl.style.visibility = "hidden"
@@ -454,6 +456,7 @@ function resetButton() {
     createKnightAttackImg.style.visibility = 'hidden'
     createKnight2AttackImg.style.visibility = 'hidden'
     stoneGolemGif.style.visibility = 'hidden'
+    bringerOfDeathGif.style.visibility = 'hidden'
     fightButtonEl.disabled = false
     fightButtonEl.style.visibility = 'hidden'
     combatLogEl.style.visibility = 'hidden'
@@ -471,6 +474,7 @@ function resetButton() {
     createKnightImg.classList.remove('fadeOut')
     createKnight2Img.classList.remove('fadeOut')
     stoneGolemGif.classList.remove('fadeOut')
+    bringerOfDeathGif.classList.remove('fadeOut')
     
     gameOverOff()
     
@@ -639,8 +643,11 @@ function disableSecondMessageScreen(evnt) {
     // createKnightAttackImg.style.visibility = "hidden"
     createKnight2AttackImg.style.visibility = "hidden"
     // stoneGolemGif.src="../css/output-onlinegiftools (1).gif"
+    bringerOfDeathGif.src="../css/bringer-of-death.gif"
     // battleScreenEl.append(stoneGolemGif)
+    battleScreen2El.append(bringerOfDeathGif)
     // stoneGolemGif.style.visibility = 'visible'
+    bringerOfDeathGif.style.visibility = 'visible'
     // battleScreenEl.append(fightButtonEl)
     battleScreen2El.append(fightButtonEl)
     // fightButtonEl.style.visibility = 'visible'
@@ -658,6 +665,7 @@ function disableSecondMessageScreen(evnt) {
     combatLog2El.style.visibility = 'visible'
     // battleScreenEl.append(resetButtonEl)
     battleScreen2El.append(resetButton2El)
+    resetButton2El.style.visibility = 'visible'
     // battleScreenEl.append(muteButton1El)
     battleScreen2El.append(muteButton1El)
     // firstMessageScreenMusic.pause()

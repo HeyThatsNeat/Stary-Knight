@@ -20,6 +20,7 @@
 * The [campfire gif](https://www.newgrounds.com/art/view/cannonbreed/rest-area) was made by [cannonbreed](https://cannonbreed.newgrounds.com/).
 * The [typewriter animation](https://css-tricks.com/snippets/css/typewriter-effect/) was made by [Geoff Graham](https://css-tricks.com/author/geoffgraham/).
 * The [ancient gateway battle background](https://www.deviantart.com/waltjan/art/Ancient-Gate-865452186) was made by [Waltjan](https://www.deviantart.com/waltjan).
+* The [2nd battle monster](https://clembod.itch.io/bringer-of-death-free) was made by [Clembod](https://clembod.itch.io/).
 ---
 ### Audio
 * The [game over theme song](https://downloads.khinsider.com/game-soundtracks/album/dragon-slayer-the-legend-of-heroes-ii-genesis/33%2520-%2520Game%2520Over.mp3) was made by the people who made Dragon Slayer - The Legend of Heroes II (Genesis)(1995).

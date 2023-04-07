@@ -518,8 +518,8 @@ html{
 .knight2 {
     position: fixed;
     margin:0;
-    top: 40vmin;;
-    left: 65vmin;
+    top: 50vmin;;
+    left: 62vmin;
     width: 10%;
     padding: 0;
     animation-name: fadeOut;
@@ -531,9 +531,28 @@ html{
 .knight2-attack {
     position: fixed;
     margin:0;
-    top: 32vmin;;
-    left: 51vmin;
+    top: 43vmin;;
+    left: 48vmin;
     width: 10%;
     padding: 0;
     width: 25%;
+}
+
+.bringer-of-death {
+    position: fixed;
+    margin:0;
+    top: 33vmin;
+    left: 125vmin;
+    width: 20%;
+    padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
+}
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    animation-play-state: running;
 }

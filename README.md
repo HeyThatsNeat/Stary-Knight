@@ -23,3 +23,4 @@ Starry Knight is about a Knight who has lost all their stars to the forces of ev
 * A longer storyline.
 * Animations, animations, and more animations!
 * Mobile responsiveness.
+* Enemy attack animations.
