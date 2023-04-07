@@ -9,13 +9,19 @@
     margin:0;
     top:0;
     left:0;
-    width: 100%;
+    right: 0;
+    bottom: 0;
+    width: auto;
     height: calc(100vh - 8em);
     padding: 4em;
     color: rgba(251, 253, 255, 0.75);
     font-family: 'Anonymous Pro', monospace;  
     background-color: #1a46a6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .start-button {
     position: absolute;
@@ -34,26 +40,29 @@
 
 .menu-title {
     position: absolute;
-    top: 20%;
+    top: 10%;
+    margin-top: 13vmin;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     color: white;
     font-size: 110px;
+    text-align: center;
 }
 
 .start-img {
     /* Set rules to fill background */
     min-height: 100%;
-    min-width: 1024px;
+    min-width: 100%;
     /* Set up proportionate scaling */
     width: 100%;
-    height: auto;
+    height: 100%;
     /* Set up positioning */
     position: fixed;
     top: 0;
     left: 0;
 }
+
 
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
     img.bg {
@@ -71,9 +80,9 @@ html{
     overflow: hidden;
 }
 
-.continue-button , .continue-button2 .continue-button3{
+.continue-button , .continue-button2 , .continue-button3{
     position: absolute;
-    top: 75%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -91,7 +100,7 @@ html{
 .reset-button , .reset-button2 {
     position: absolute;
     top: 15%;
-    left: 95%;
+    left: 93%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     background-color: #8336ad;
@@ -107,7 +116,7 @@ html{
 
 .skip-button , .skip-button2 , .skip-button3 {
     position: absolute;
-    top: 115%;
+    top: 95%;
     left: 95%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -124,8 +133,28 @@ html{
 
 
 .first-message , .second-message {
-    max-width: 100%;
-    height: calc(100vh - 8em);
+    width: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 4em;
+    color: rgba(249, 249, 249, 0.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #191919;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.third-message , .forth-message , .fifth-message {
+    width: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 4em;
     color: rgba(249, 249, 249, 0.75);
     font-family: 'Anonymous Pro', monospace;  
@@ -137,7 +166,7 @@ html{
 
 
 
-.line-1 , .line-3 {
+.line-1 , .line-3 , .line-5 , .line-7 , .line-9 , .line-11 {
     position: fixed;
     top: 50%;  
     width: 24em;
@@ -150,7 +179,7 @@ html{
     transform: translateY(-50%);    
 }
 
-.line-2 , .line-4 {
+.line-2 , .line-4 , .line-6 , .line-8 , .line-10 , .line-12 {
     position: fixed;
     top: 55%;  
     width: 24em;
@@ -198,7 +227,7 @@ html{
 
 /* BATTLE SCREEN */
 
-.battle-screen , .battle-screen2 {
+.battle-screen , .battle-screen2 , .battle-screen3 {
     position:fixed;
     margin:0;
     top:0;
@@ -212,7 +241,7 @@ html{
 }
 
   /* YOU MAY HAVE TO CHECK ON SECOND BATTLE IMG, I DONT  THINK THIS IS CORRECT */
-.first-battle-img , .second-battle-img {
+.first-battle-img , .second-battle-img , .third-battle-img{
     background-size: cover;
     width: 100%;
     height: 121.5%;
@@ -254,23 +283,6 @@ html{
     animation-play-state: paused;
 }
 
-.fadeOut {
-    -webkit-animation-name: fadeOut;
-    animation-name: fadeOut;
-    animation-play-state: running;
-}
-
-@-webkit-keyframes fadeOut {
-    0% {opacity: 1;}
-    100% {opacity: 0;}
-}
-
-@keyframes fadeOut {
-    0% {opacity: 1;}
-    100% {opacity: 0;}
-}
-
-
 .fight-button {
     position: absolute;
     top: 75%;
@@ -287,7 +299,7 @@ html{
     z-index: inherit;
 }
 
-.combat-log , .combat-log2 {
+.combat-log , .combat-log2 , .combat-log3 {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -330,8 +342,8 @@ html{
 
 .mute-button , .mute-button2 {
     position: absolute;
-    top: 10%;
-    left: 80%;
+    top: 7%;
+    left: 93%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     background-color: #555;
@@ -374,7 +386,7 @@ html{
     right: 0;
     bottom: 0;
     background-color: #393939; /* Black background with opacity */
-    z-index: -10; 
+    z-index: -100; 
     cursor: default;
 }
 
@@ -554,12 +566,68 @@ html{
     animation-play-state: paused;
 }
 
-.fadeOut {
-    -webkit-animation-name: fadeOut;
-    animation-name: fadeOut;
-    animation-play-state: running;
-}
 
  /* THIRD MESSAGE SCREEN */
 
  /* .skip-button3  moved to .skip-button */
+
+    /* THIRD BATTLE SCREEN */
+    .knight3 {
+        position: fixed;
+        margin:0;
+        top: 44vmin;;
+        left: 62vmin;
+        width: 10%;
+        padding: 0;
+        animation-name: fadeOut;
+        -webkit-animation-duration: 3s;animation-duration: 3s;
+        -webkit-animation-fill-mode: both;animation-fill-mode: both;
+        animation-play-state: paused;
+    }
+
+    .knight3-attack {
+        position: fixed;
+        margin:0;
+        top: 43vmin;;
+        left: 48vmin;
+        width: 10%;
+        padding: 0;
+        width: 25%;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .fadeOut {
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+        animation-play-state: running;
+    }
+    
+    @-webkit-keyframes fadeOut {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    
+    @keyframes fadeOut {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    
