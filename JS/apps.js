@@ -19,13 +19,14 @@ const thirdBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
 const mainMenuMusic = new Audio("../css/audio/Main-Menu.mp3")
-mainMenuMusic.preload
 
 const gameOverMusic = new Audio("../css/audio/33 - Game Over.mp3")
 
 const firstMessageScreenMusic = new Audio("../css/audio/7.5second-typewriting-effect.mp3")
 const secondMessageScreenMusic = new Audio("../css/audio/7.5second-typewriting-effect.mp3")
 const thirdMessageScreenMusic = new Audio("../css/audio/7.5second-typewriting-effect.mp3")
+const campfireMusic = new Audio("../css/audio/03. Be In Asleep.mp3")
+const emptySilenceMusic = new Audio("../css/audio/7.5-seconds-of-silence.mp3")
 /*---------------------------- Variables (state) ----------------------------*/
 
 let gameLevel, win, playerHP, computerHp, combatLog, turn, startFight, actionMenu, stars  
@@ -63,12 +64,18 @@ const createContinueButton3El = document.createElement("button")
 createContinueButton3El.className =  "continue-button3"
 createContinueButton3El.innerText = "Continue"
 
+const createContinueButton4El = document.createElement("button")
+createContinueButton4El.className =  "continue-button4"
+createContinueButton4El.innerText = "Continue"
+
 const startScreenEl = document.querySelector(".start-screen")
 
 
 const firstMessageScreenEl = document.querySelector(".first-message")
 const secondMessageScreenEl = document.querySelector(".second-message")
 const thirdMessageScreenEl = document.querySelector(".third-message")
+
+const campfireSceneEl = document.querySelector(".campfire-scene")
 
 const menuTitleEl = document.createElement("h1")
 menuTitleEl.className = "menu-title"
@@ -81,6 +88,10 @@ const createSecondBattleImg = document.createElement("img")
 createSecondBattleImg.className = "second-battle-img"
 const createThirdBattleImg = document.createElement("img")
 createThirdBattleImg.className = "third-battle-img"
+
+const restSceneGif = document.createElement("img")
+restSceneGif.className = "rest-scene-gif"
+
 
 const createKnightImg = document.createElement("img")
 createKnightImg.className = "knight"
@@ -122,6 +133,10 @@ skipButton2El.innerText = "Skip"
 const skipButton3El = document.createElement("button")
 skipButton3El.className = "skip-button3"
 skipButton3El.innerText = "Skip"
+
+const skipButton4El = document.createElement("button")
+skipButton4El.className = "skip-button4"
+skipButton4El.innerText = "Skip"
 
 const combatLogEl = document.createElement("div")
 combatLogEl.className = "combat-log"
@@ -177,6 +192,9 @@ forward1ButtonEl.innerText = "Forward!"
 const forward2ButtonEl = document.createElement("button")
 forward2ButtonEl.className = "forward2-button"
 forward2ButtonEl.innerText = "Forward!"
+const forward3ButtonEl = document.createElement("button")
+forward3ButtonEl.className = "forward3-button"
+forward3ButtonEl.innerText = "Forward!"
 
 const typeWriter1Animation = document.querySelector('.anim-typewriter')
 const typeWriter2Animation = document.querySelector('.anim-typewriter2')
@@ -184,14 +202,18 @@ const typeWriter3Animation = document.querySelector('.anim-typewriter3')
 const typeWriter4Animation = document.querySelector('.anim-typewriter4')
 const typeWriter5Animation = document.querySelector('.anim-typewriter5')
 const typeWriter6Animation = document.querySelector('.anim-typewriter6')
+const typeWriter7Animation = document.querySelector('.anim-typewriter7')
+const typeWriter8Animation = document.querySelector('.anim-typewriter8')
 
 /*----------------------------- Event Listeners ------------------------------*/
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createContinueButton2El.addEventListener("click", disableSecondMessageScreen)
 createContinueButton3El.addEventListener("click", disableThirdMessageScreen)
+// createContinueButton4El.addEventListener("click", disableCampfireScene)
 skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 skipButton2El.addEventListener("click", disableSecondMessageScreen)
 skipButton3El.addEventListener("click", disableThirdMessageScreen)
+skipButton4El.addEventListener("click", campfireScene)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 fightButtonEl.addEventListener("click", render)
 resetButtonEl.addEventListener("click", resetButton)
@@ -202,7 +224,7 @@ muteButton2El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
 forward1ButtonEl.addEventListener("click", disableFirstBattleScreen)
 forward2ButtonEl.addEventListener("click", disabledSecondBattleScreen)
-
+forward3ButtonEl.addEventListener("click", campfireScene)
 /*-------------------------------- Functions ---------------------------------*/
 
 // NEED TO FIX ENEMY DMG FROM STAYING THE SAME EVERY TIME
@@ -411,16 +433,18 @@ function checkIfWin(){
         fightButtonEl.style.visibility = "hidden"
 
         setTimeout(() => {
-            createKnightImg.style.visibility = "visible"
-            winningTheme.play()
-            winningTheme.volume = 0.08
-            firstBattleMusic.pause()
-            firstBattleMusic.currentTime = 0
-            battleScreenEl.append(youWinMessageEl)
-            youWinMessageEl.style.visibility = "visible"
-            battleScreenEl.style.visibility = "visible"
-            battleScreenEl.append(forward1ButtonEl)
-            forward1ButtonEl.style.visibility = "visible"
+            if (firstBattleMusic.currentTime > 0.05) {
+                createKnightImg.style.visibility = "visible"
+                winningTheme.play()
+                winningTheme.volume = 0.08
+                firstBattleMusic.pause()
+                firstBattleMusic.currentTime = 0
+                battleScreenEl.append(youWinMessageEl)
+                youWinMessageEl.style.visibility = "visible"
+                battleScreenEl.style.visibility = "visible"
+                battleScreenEl.append(forward1ButtonEl)
+                forward1ButtonEl.style.visibility = "visible"
+            }
         }, 3500)
     }
     // FOR SECOND BATTLE
@@ -432,16 +456,18 @@ function checkIfWin(){
             fightButtonEl.style.visibility = "hidden"
 
             setTimeout(() => {
-                createKnight2Img.style.visibility = "visible"
-                winningTheme.play()
-                winningTheme.volume = 0.08
-                secondBattleMusic.pause()
-                secondBattleMusic.currentTime = 0
-                battleScreen2El.append(youWinMessageEl)
-                youWinMessageEl.style.visibility = "visible"
-                battleScreen2El.style.visibility = "visible"
-                battleScreen2El.append(forward2ButtonEl)
-                forward2ButtonEl.style.visibility = "visible"
+                if (secondBattleMusic.currentTime > 0.05) {
+                    createKnight2Img.style.visibility = "visible"
+                    winningTheme.play()
+                    winningTheme.volume = 0.08
+                    secondBattleMusic.pause()
+                    secondBattleMusic.currentTime = 0
+                    battleScreen2El.append(youWinMessageEl)
+                    youWinMessageEl.style.visibility = "visible"
+                    battleScreen2El.style.visibility = "visible"
+                    battleScreen2El.append(forward2ButtonEl)
+                    forward2ButtonEl.style.visibility = "visible"
+                }
             }, 3500)
     }
     if(currentEnemy.alive === false && currentEnemy.stars === 0 && thirdBattleMusic.currentTime > 0.05) {
@@ -482,36 +508,44 @@ function toggleMuted1() {
     thirdBattleMusic.muted = !thirdBattleMusic.muted
     secondMessageScreenMusic.muted = !secondMessageScreenMusic.muted
     thirdMessageScreenMusic.muted = ! thirdMessageScreenMusic.muted 
+    campfireMusic.muted = !campfireMusic.muted
+    emptySilenceMusic.muted = !emptySilenceMusic.muted
 }
 
 
 function resetButton() {
-        mainMenuMusic.pause()
-        mainMenuMusic.currentTime = 0
+    mainMenuMusic.pause()
+    mainMenuMusic.currentTime = 0
 
-        firstBattleMusic.pause()
-        firstBattleMusic.currentTime = 0
+    firstBattleMusic.pause()
+    firstBattleMusic.currentTime = 0
 
-        secondBattleMusic.pause()
-        secondBattleMusic.currentTime = 0
+    secondBattleMusic.pause()
+    secondBattleMusic.currentTime = 0
 
-        thirdBattleMusic.pause()
-        thirdBattleMusic.currentTime = 0
+    thirdBattleMusic.pause()
+    thirdBattleMusic.currentTime = 0
 
-        winningTheme.pause()
-        winningTheme.currentTime = 0
+    winningTheme.pause()
+    winningTheme.currentTime = 0
 
-        gameOverMusic.pause()
-        gameOverMusic.currentTime = 0
+    gameOverMusic.pause()
+    gameOverMusic.currentTime = 0
 
-        firstMessageScreenMusic.pause()
-        firstMessageScreenMusic.currentTime = 0
+    firstMessageScreenMusic.pause()
+    firstMessageScreenMusic.currentTime = 0
 
-        secondMessageScreenMusic.pause()
-        secondMessageScreenMusic.currentTime = 0
+    secondMessageScreenMusic.pause()
+    secondMessageScreenMusic.currentTime = 0
 
-        thirdMessageScreenMusic.pause()
-        thirdMessageScreenMusic.currentTime = 0
+    thirdMessageScreenMusic.pause()
+    thirdMessageScreenMusic.currentTime = 0
+
+    campfireMusic.pause()
+    campfireMusic.currentTime = 0
+
+    emptySilenceMusic.pause()
+    emptySilenceMusic.currentTime = 0
 
     startScreenEl.style.display = 'inline'
     firstMessageScreenEl.style.display = 'flex'
@@ -524,11 +558,13 @@ function resetButton() {
     createContinueButtonEl.style.visibility = 'hidden'
     createContinueButton2El.style.visibility = 'hidden'
     createContinueButton3El.style.visibility = 'hidden'
+    createContinueButton4El.style.visibility = 'hidden'
 
     skipButtonEl.style.visibility = 'hidden'
     skipButton2El.style.visibility = 'hidden'
     skipButton3El.style.visibility = 'hidden'
-    
+    skipButton4El.style.visibility = 'hidden'
+
     resetButtonEl.style.visibility = 'hidden'
     resetButton2El.style.visibility = 'hidden'
 
@@ -550,6 +586,8 @@ function resetButton() {
     bringerOfDeathGif.style.visibility = 'hidden'
     fireWormGif.style.visibility = 'hidden'
 
+    restSceneGif.style.visibility = 'hidden'
+
     fightButtonEl.disabled = false
     fightButtonEl.style.visibility = 'hidden'
 
@@ -564,8 +602,9 @@ function resetButton() {
 
     forward1ButtonEl.style.visibility = "hidden"
     forward2ButtonEl.style.visibility = "hidden"
+    forward3ButtonEl.style.visibility = "hidden"
 
-    console.log("LOOK HERE",skipButton3El.style.visibility)
+    console.log("SKIP BUTTON 4 VISIBLITILY",skipButton4El.style.visibility)
 
     createKnightImg.classList.remove('fadeOut')
     createKnight2Img.classList.remove('fadeOut')
@@ -622,6 +661,16 @@ function resetThirdAnimationScreen() {
     typeWriter6Animation.style.animation = 'none'
     typeWriter6Animation.offsetHeight
     typeWriter6Animation.style.animation = null 
+}
+
+function resetFourthAnimationScreen() {
+    typeWriter7Animation.style.animation = 'none'
+    typeWriter7Animation.offsetHeight
+    typeWriter7Animation.style.animation = null 
+
+    typeWriter8Animation.style.animation = 'none'
+    typeWriter8Animation.offsetHeight
+    typeWriter8Animation.style.animation = null 
 }
 
 function playMainMenu() {
@@ -793,60 +842,90 @@ function disabledSecondBattleScreen(evnt) {
 }
 
 function disableThirdMessageScreen(evnt) {
-    // secondMessageScreenEl.style.display = 'none'
     thirdMessageScreenEl.style.display = 'none'
-    // createSecondBattleImg.src="../css/ruins.jpg"
     createThirdBattleImg.src="../css/walk_in_elsweyr___lair_by_khajiitsawyer_d5gk0nr.png"
-    // battleScreen2El.append(createSecondBattleImg)
     battleScreen3El.append(createThirdBattleImg)
-    // createSecondBattleImg.style.visibility = 'visible'
     createThirdBattleImg.style.visibility = 'visible'
-    // createKnight2Img.src="../css/knight-animation.gif"
     createKnight3Img.src="../css/knight-animation.gif"
-    // createKnight2AttackImg.src="../css/knight-attack.gif"
     createKnight3AttackImg.src="../css/knight-attack.gif"
-    // battleScreen2El.append(createKnight2Img)
     battleScreen3El.append(createKnight3Img)
-    // battleScreen2El.append(createKnight2AttackImg)
     battleScreen3El.append(createKnight3AttackImg)
-    // createKnight2Img.style.visibility = 'visible'
     createKnight3Img.style.visibility = 'visible'
-    // createKnight2AttackImg.style.visibility = "hidden"
     createKnight3AttackImg.style.visibility = "hidden"
-    // bringerOfDeathGif.src="../css/bringer-of-death.gif"
     fireWormGif.src="../css/fire-worm.gif"
-    // battleScreen2El.append(bringerOfDeathGif)
     battleScreen3El.append(fireWormGif)
-    // bringerOfDeathGif.style.visibility = 'visible'
     fireWormGif.style.visibility = 'visible'
-    // battleScreen2El.append(fightButtonEl)
     battleScreen3El.append(fightButtonEl)
-    // fightButtonEl.style.visibility = 'visible'
     fightButtonEl.style.visibility = 'visible'
-    // secondBattleMusic.volume = 0.04
     thirdBattleMusic.volume = 0.04
-    // secondBattleMusic.play()
     thirdBattleMusic.play()
-    // secondBattleMusic.loop = true
     thirdBattleMusic.loop = true
-    // battleScreen2El.append(combatLog2El)
     battleScreen3El.append(combatLog3El)
-    // combatLog2El.style.visibility = 'visible'
     combatLog3El.innerHTML = ""
     combatLog3El.style.visibility = 'visible'
-    // battleScreen2El.append(resetButton2El)
     battleScreen3El.append(resetButtonEl)
-    // resetButton2El.style.visibility = 'visible'
     resetButtonEl.style.visibility = 'visible'
-    // battleScreen2El.append(muteButton1El)
     battleScreen3El.append(muteButton1El)
-    // firstMessageScreenMusic.pause()
     thirdMessageScreenMusic.pause()
-    // firstMessageScreenMusic.currentTime = 0
     thirdMessageScreenMusic.currentTime = 0
     evnt.stopPropagation()
 }
 
+//  DISABLE THIRD BATTLE SCREEN
+function campfireScene(evnt) {
+    // battleScreen2El.style.display = "none"
+    battleScreen3El.style.display = "none"
+    // updateEnemy()
+    updateEnemy()
+    // console.log(currentEnemy)
+    console.log(currentEnemy)
+    // secondBattleMusic.pause()
+    thirdBattleMusic.pause()
+    // secondBattleMusic.currentTime = 0
+    thirdBattleMusic.currentTime = 0
+    restSceneGif.src='../css/rest-scene.gif'
+    restSceneGif.style.visibility = "visible"
+    campfireSceneEl.append(restSceneGif)
+    // thirdMessageScreenEl.classList.add('play-animation3')
+    campfireSceneEl.classList.add('play-animation4')
+    // resetThirdAnimationScreen()
+    resetFourthAnimationScreen()
+
+    // thirdMessageScreenEl.append(skipButton3El)
+    campfireSceneEl.append(skipButton4El)
+    // skipButton3El.style.visibility = 'visible'
+    skipButton4El.style.visibility = 'visible'
+    console.log("SKIP BUTTON 4 VISIBILITY AT THE END",skipButton4El.style.visibility)
+    // thirdMessageScreenEl.append(resetButtonEl)
+    campfireSceneEl.append(resetButtonEl)
+    // resetButtonEl.style.visibility = 'visible'
+    resetButtonEl.style.visibility - 'visible'
+    // thirdMessageScreenEl.append(muteButton2El)
+    campfireSceneEl.append(muteButton1El)
+    muteButton1El.style.visibility = 'visible'
+    emptySilenceMusic.play()
+    emptySilenceMusic.addEventListener("ended", function() { 
+        if (emptySilenceMusic.currentTime > 0.5) {
+            campfireSceneEl.append(createContinueButton4El)   
+            createContinueButton4El.style.visibility = 'visible'
+            console.log(createContinueButton4El.style.visibility)
+            console.log("animation end FOR INVISIBLE MUSIC")
+            console.log(enemies)
+            console.log(player)
+        }
+    })
+    // thirdMessageScreenMusic.play()
+    campfireMusic.play()
+    campfireMusic.volume = 0.5
+    campfireMusic.loop = true
+    winningTheme.pause()
+    winningTheme.currentTime = 0
+    combatLog3El.innerHTML = ""
+    evnt.stopPropagation()
+}
+
+console.log(enemies)
+console.log(player)
 //   campfire scene next!!! 
 //to be implemented
 //toggle button doesnt keep everything turned on after you hit it to play music onload

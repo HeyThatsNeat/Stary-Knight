@@ -27,3 +27,4 @@
 * The [game over theme song](https://downloads.khinsider.com/game-soundtracks/album/dragon-slayer-the-legend-of-heroes-ii-genesis/33%2520-%2520Game%2520Over.mp3) was made by the people who made Dragon Slayer - The Legend of Heroes II (Genesis)(1995).
 * The [main menu song](https://www.fesliyanstudios.com/royalty-free-music/download/8-bit-menu/287) as well as [most music in this game](https://www.fesliyanstudios.com/royalty-free-music/downloads-c/8-bit-music/6) was made by David Renda. 
 * The [type writer sound](https://www.videvo.net/sound-effect/typewriter-antique-01/448941/) was made by [Videvo](https://www.videvo.net/profile/videvo/).
+* The [resting campfire song](https://downloads.khinsider.com/game-soundtracks/album/mime-pc-98-gamerip/03.%2520Be%2520In%2520Asleep.mp3) was made by the people who made Mime (PC-98)(1995).
