@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const enemies = [
-    {name: "Stone Golem", hp: 15, turn: -1, dmg: 0, stars: 1, alive: true}, 
+    {name: "Stone Golem", hp: 140, turn: -1, dmg: 0, stars: 1, alive: true}, 
     {name: "Bringer of Death", hp: 15, turn: -1, dmg: 0, stars: 2, alive: true}, 
     {name: "Fire Worm", hp: 15, turn: -1, dmg: 0, stars: 3, alive: true}, 
     {name: "Giant Ooze", hp: 15, turn: -1, dmg: 0, stars: 4, alive: true}, 
@@ -42,6 +42,10 @@ let currentEnemy = enemies.find(function(enemy) {
 /*------------------------ Cached Element References ------------------------*/
 const createStartMenuImg = document.createElement("img")
 createStartMenuImg.className = "start-img"
+
+const starBackgroundImg = document.createElement("img")
+starBackgroundImg.className = "star-background"
+starBackgroundImg.src="../css/pictures/wallpaperflare.com_wallpaper.jpg"
 
 const createStartButtonEl = document.createElement("button")
 createStartButtonEl.className = "start-button"
@@ -223,6 +227,10 @@ const gameOverResetButton2El = document.createElement("button")
 gameOverResetButton2El.className = "game-over-reset-button2"
 gameOverResetButton2El.innerText = "Try Again?"
 
+const knockYourselfOutButton = document.createElement("button")
+knockYourselfOutButton.className = "knock-yourself-out-button"
+knockYourselfOutButton.innerText = "K.O. yourself"
+
 const forward1ButtonEl = document.createElement("button")
 forward1ButtonEl.className = "forward1-button"
 forward1ButtonEl.innerText = "Forward!"
@@ -319,6 +327,7 @@ forward1ButtonEl.addEventListener("click", disableFirstBattleScreen)
 forward2ButtonEl.addEventListener("click", disableSecondBattleScreen)
 forward3ButtonEl.addEventListener("click", campfireScene)
 forward4ButtonEl.addEventListener("click", disableFourthBattleScreen)
+knockYourselfOutButton.addEventListener("click", knockYourselfOut)
 /*-------------------------------- Functions ---------------------------------*/
 
 function init() {
@@ -452,7 +461,7 @@ function playerChoice() {
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 2)
+    currentEnemy.dmg = Math.floor(Math.random() * 1000)
 }
 
 // IN PLAYER OBJECT
@@ -514,6 +523,11 @@ function gameOver() {
         combatLog4El.innerHTML += `• You have been knocked out! <br>`
         combatLog5El.innerHTML += `• You have been knocked out! <br>`
     }
+}
+
+function knockYourselfOut(){
+    player.hp = -1
+    gameOver()
 }
 
 function gameOverOn() {
@@ -784,6 +798,8 @@ function resetButton() {
     skipButton4El.style.visibility = 'hidden'
     skipButton5El.style.visibility = 'hidden'
 
+    knockYourselfOutButton.style.visibility = 'hidden'
+
     resetButtonEl.style.visibility = 'hidden'
     resetButton2El.style.visibility = 'hidden'
 
@@ -992,6 +1008,8 @@ function disableFirstMessageScreen(evnt) {
     muteButton1El.style.visibility = 'visible'
     firstMessageScreenMusic.pause()
     firstMessageScreenMusic.currentTime = 0
+    battleScreenEl.append(knockYourselfOutButton)
+    knockYourselfOutButton.style.visibility = 'visible'
     
     evnt.stopPropagation()
 }
@@ -999,6 +1017,7 @@ function disableFirstMessageScreen(evnt) {
 // GAME OVER SCREEN
 gameOverScreenEl.append(gameoverMuteButtonEl)
 gameOverScreenEl.append(gameOverResetButtonEl)
+gameOverScreenEl.append(starBackgroundImg)
 
 youWonTheGameScreenEl.append(gameoverMuteButton2El)
 youWonTheGameScreenEl.append(gameOverResetButton2El)
