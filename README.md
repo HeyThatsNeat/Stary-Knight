@@ -1,5 +1,5 @@
 # **Starry Knight**
-![Starry preview](./css/Readme-preview.jpg)
+![Starry preview](./css/pictures/starry-knight-README.png)
 Starry Knight is a video game inspired by turn-based old-school games like Final Fantasy and Pokemon. This game takes you on a story-based journey through a sequence of menus. You press the fight button to attack your enemy until one of you (hopefully not you) gets knocked out. The combat log at the bottom shows you what is happening during the fight. If you lose all your health points, a game-over screen will appear. If you win, a congratulations screen appears, and you move on to the next scene. You get stronger the farther you go into the game, but your enemies do as well.
 Starry Knight is about a Knight who has lost all their stars to the forces of evil, and the Knight must defeat them to get their stars back.
 
