@@ -17,6 +17,7 @@ const secondBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming
 const thirdBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const fourthBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const fifthBattleMusic = new Audio("../css/audio/2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.mp3")
+const wonGameSong = new Audio("../css/audio/20 Theme of Friendship Effort Victory (Credit Roll).mp3")
 
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
@@ -245,6 +246,53 @@ const typeWriter7Animation = document.querySelector('.anim-typewriter7')
 const typeWriter8Animation = document.querySelector('.anim-typewriter8')
 const typeWriter9Animation = document.querySelector('.anim-typewriter9')
 const typeWriter10Animation = document.querySelector('.anim-typewriter10')
+
+const star1Gif = document.createElement("img")
+star1Gif.className = "star1"
+star1Gif.src="/css/pictures/twinkle-stars.gif"
+const star2Gif = document.createElement("img")
+star2Gif.className = "star2"
+star2Gif.src="/css/pictures/twinkle-stars.gif"
+const star3Gif = document.createElement("img")
+star3Gif.className = "star3"
+star3Gif.src="/css/pictures/twinkle-stars.gif"
+const star4Gif = document.createElement("img")
+star4Gif.className = "star4"
+star4Gif.src="/css/pictures/twinkle-stars.gif"
+const star5Gif = document.createElement("img")
+star5Gif.className = "star5"
+star5Gif.src="/css/pictures/twinkle-stars.gif"
+const star6Gif = document.createElement("img")
+star6Gif.className = "star6"
+star6Gif.src="/css/pictures/twinkle-stars.gif"
+const star7Gif = document.createElement("img")
+star7Gif.className = "star7"
+star7Gif.src="/css/pictures/twinkle-stars.gif"
+const star8Gif = document.createElement("img")
+star8Gif.className = "star8"
+star8Gif.src="/css/pictures/twinkle-stars.gif"
+const star9Gif = document.createElement("img")
+star9Gif.className = "star9"
+star9Gif.src="/css/pictures/twinkle-stars.gif"
+const star10Gif = document.createElement("img")
+star10Gif.className = "star10"
+star10Gif.src="/css/pictures/twinkle-stars.gif"
+const star11Gif = document.createElement("img")
+star11Gif.className = "star11"
+star11Gif.src="/css/pictures/twinkle-stars.gif"
+const star12Gif = document.createElement("img")
+star12Gif.className = "star12"
+star12Gif.src="/css/pictures/twinkle-stars.gif"
+const star13Gif = document.createElement("img")
+star13Gif.className = "star13"
+star13Gif.src="/css/pictures/twinkle-stars.gif"
+const star14Gif = document.createElement("img")
+star14Gif.className = "star14"
+star14Gif.src="/css/pictures/twinkle-stars.gif"
+const star15Gif = document.createElement("img")
+star15Gif.className = "star15"
+star15Gif.src="/css/pictures/twinkle-stars.gif"
+
 
 /*----------------------------- Event Listeners ------------------------------*/
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
@@ -499,6 +547,8 @@ function checkIfWin(){
                 createKnightImg.style.visibility = "visible"
                 winningTheme.play()
                 winningTheme.volume = 0.08
+                battleScreenEl.append(star1Gif)
+                star1Gif.style.visibility = 'visible'
                 firstBattleMusic.pause()
                 firstBattleMusic.currentTime = 0
                 battleScreenEl.append(youWinMessageEl)
@@ -524,6 +574,10 @@ function checkIfWin(){
                     winningTheme.volume = 0.08
                     secondBattleMusic.pause()
                     secondBattleMusic.currentTime = 0
+                    battleScreen2El.append(star2Gif)
+                    star2Gif.style.visibility = 'visible'
+                    battleScreen2El.append(star3Gif)
+                    star3Gif.style.visibility = 'visible'
                     battleScreen2El.append(youWinMessageEl)
                     youWinMessageEl.style.visibility = "visible"
                     battleScreen2El.style.visibility = "visible"
@@ -546,6 +600,12 @@ function checkIfWin(){
                 winningTheme.volume = 0.08
                 thirdBattleMusic.pause()
                 thirdBattleMusic.currentTime = 0
+                battleScreen3El.append(star4Gif)
+                star4Gif.style.visibility = 'visible'
+                battleScreen3El.append(star5Gif)
+                star5Gif.style.visibility = 'visible'
+                battleScreen3El.append(star6Gif)
+                star6Gif.style.visibility = 'visible'
                 battleScreen3El.append(youWinMessageEl)
                 youWinMessageEl.style.visibility = "visible"
                 battleScreen3El.style.visibility = "visible"
@@ -568,6 +628,14 @@ function checkIfWin(){
                 winningTheme.volume = 0.08
                 fourthBattleMusic.pause()
                 fourthBattleMusic.currentTime = 0
+                battleScreen4El.append(star7Gif)
+                star7Gif.style.visibility = 'visible'
+                battleScreen4El.append(star8Gif)
+                star8Gif.style.visibility = 'visible'
+                battleScreen4El.append(star9Gif)
+                star9Gif.style.visibility = 'visible'
+                battleScreen4El.append(star10Gif)
+                star10Gif.style.visibility = 'visible'
                 battleScreen4El.append(youWinMessageEl)
                 youWinMessageEl.style.visibility = "visible"
                 battleScreen4El.style.visibility = "visible"
@@ -590,6 +658,16 @@ function checkIfWin(){
                 winningTheme.volume = 0.08
                 fifthBattleMusic.pause()
                 fifthBattleMusic.currentTime = 0
+                battleScreen5El.append(star11Gif)
+                star11Gif.style.visibility = 'visible'
+                battleScreen5El.append(star12Gif)
+                star12Gif.style.visibility = 'visible'
+                battleScreen5El.append(star13Gif)
+                star13Gif.style.visibility = 'visible'
+                battleScreen5El.append(star14Gif)
+                star14Gif.style.visibility = 'visible'
+                battleScreen5El.append(star15Gif)
+                star15Gif.style.visibility = 'visible'
                 battleScreen5El.append(youWinMessageEl)
                 youWinMessageEl.style.visibility = "visible"
                 battleScreen5El.style.visibility = "visible"
@@ -605,6 +683,9 @@ function beatTheGame() {
     if (enemies[4].alive === false) {
         player.win = true
     setTimeout(() => {
+        wonGameSong.play() 
+        wonGameSong.volume = 0.2
+        wonGameSong.loop = true
         youWonTheGameScreenEl.style.display = "block"
         youWonTheGameScreenEl.style.visibility = 'visible'
         youWonTheGameScreenEl.style.zIndex = 5
@@ -631,6 +712,7 @@ function toggleMuted1() {
     fifthMessageScreenMusic.muted = ! fifthMessageScreenMusic.muted 
     campfireMusic.muted = !campfireMusic.muted
     emptySilenceMusic.muted = !emptySilenceMusic.muted
+    wonGameSong.muted = !wonGameSong.muted
 }
 
 function resetButton() {
@@ -674,6 +756,9 @@ function resetButton() {
 
     emptySilenceMusic.pause()
     emptySilenceMusic.currentTime = 0
+
+    wonGameSong.pause()
+    wonGameSong.currentTime = 0
 
     startScreenEl.style.display = 'inline'
     firstMessageScreenEl.style.display = 'flex'
@@ -721,10 +806,25 @@ function resetButton() {
     createKnight5AttackImg.style.visibility = 'hidden'
 
     stoneGolemGif.style.visibility = 'hidden'
+    star1Gif.style.visibility = 'hidden'
     bringerOfDeathGif.style.visibility = 'hidden'
+    star2Gif.style.visibility = 'hidden'
+    star3Gif.style.visibility = 'hidden'
     fireWormGif.style.visibility = 'hidden'
+    star4Gif.style.visibility = 'hidden'
+    star5Gif.style.visibility = 'hidden'
+    star6Gif.style.visibility = 'hidden'
     oozeGif.style.visibility = 'hidden'
+    star7Gif.style.visibility = 'hidden'
+    star8Gif.style.visibility = 'hidden'
+    star9Gif.style.visibility = 'hidden'
+    star10Gif.style.visibility = 'hidden'
     bossGif.style.visibility = 'hidden'
+    star11Gif.style.visibility = 'hidden'
+    star12Gif.style.visibility = 'hidden'
+    star13Gif.style.visibility = 'hidden'
+    star14Gif.style.visibility = 'hidden'
+    star15Gif.style.visibility = 'hidden'
 
     restSceneGif.style.visibility = 'hidden'
 
@@ -892,6 +992,7 @@ function disableFirstMessageScreen(evnt) {
     muteButton1El.style.visibility = 'visible'
     firstMessageScreenMusic.pause()
     firstMessageScreenMusic.currentTime = 0
+    
     evnt.stopPropagation()
 }
 
@@ -955,6 +1056,7 @@ function disableSecondMessageScreen(evnt) {
     muteButton1El.style.visibility = 'visible'
     secondMessageScreenMusic.pause()
     secondMessageScreenMusic.currentTime = 0
+    
     evnt.stopPropagation()
 }
 
@@ -1075,6 +1177,7 @@ function disableCampfireScene(evnt) {
     battleScreen4El.append(muteButton1El)
     campfireMusic.pause()
     campfireMusic.currentTime = 0
+    
     evnt.stopPropagation()
 }
 

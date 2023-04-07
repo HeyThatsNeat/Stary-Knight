@@ -591,6 +591,15 @@ html{
     z-index: inherit;
 }
 
+.star1 {
+    position: fixed;
+    margin:0;
+    top: 30vmin;
+    left: 115vmin;
+    width: 8%;
+    padding: 0;
+}
+
 /* SECOND MESSAGE SCREEN */
 
 
@@ -634,6 +643,23 @@ html{
     animation-play-state: paused;
 }
 
+.star2 {
+    position: fixed;
+    margin:0;
+    top: 25vmin;
+    left: 119vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star3 {
+    position: fixed;
+    margin:0;
+    top: 40vmin;
+    left: 115vmin;
+    width: 8%;
+    padding: 0;
+}
 
  /* THIRD MESSAGE SCREEN */
 
@@ -675,9 +701,34 @@ html{
     animation-play-state: paused;
 }
 
-  /* REST SCENE */
+.star4 {
+    position: fixed;
+    margin:0;
+    top: 23vmin;
+    left: 119vmin;
+    width: 8%;
+    padding: 0;
+}
 
-   /* YOU MIGHT HAVE TO CHECK ON THIS */
+.star5 {
+    position: fixed;
+    margin:0;
+    top: 30vmin;
+    left: 105vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star6 {
+    position: fixed;
+    margin:0;
+    top: 38vmin;
+    left: 119vmin;
+    width: 8%;
+    padding: 0;
+}
+
+  /* REST SCENE */
 
 .campfire-scene {
     position:fixed;
@@ -746,6 +797,40 @@ html{
     animation-play-state: paused;
 }
 
+.star7 {
+    position: fixed;
+    margin:0;
+    top: 26vmin;
+    left: 119vmin;
+    width: 8%;
+    padding: 0;
+}
+.star8 {
+    position: fixed;
+    margin:0;
+    top: 30vmin;
+    left: 105vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star9 {
+    position: fixed;
+    margin:0;
+    top: 39vmin;
+    left: 119vmin;
+    width: 8%;
+    padding: 0;
+}
+.star10 {
+    position: fixed;
+    margin:0;
+    top: 42vmin;
+    left: 107vmin;
+    width: 8%;
+    padding: 0;
+}
+
   /* FIFTH MESSAGE SCREEN */
 
 
@@ -787,6 +872,50 @@ html{
     animation-play-state: paused;
 }
 
+.star11 {
+    position: fixed;
+    margin:0;
+    top: 35vmin;
+    left: 140vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star12 {
+    position: fixed;
+    margin:0;
+    top: 29vmin;
+    left: 130vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star13 {
+    position: fixed;
+    margin:0;
+    top: 45vmin;
+    left: 120vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star14 {
+    position: fixed;
+    margin:0;
+    top: 37vmin;
+    left: 120vmin;
+    width: 8%;
+    padding: 0;
+}
+
+.star15 {
+    position: fixed;
+    margin:0;
+    top: 45vmin;
+    left: 107vmin;
+    width: 8%;
+    padding: 0;
+}
 
 
    /* TO MAKE SURE EVERYTHING ABOVE WORKS  */
