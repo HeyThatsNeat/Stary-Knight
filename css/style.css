@@ -115,7 +115,7 @@ html{
 
 .reset-button , .reset-button2 {
     position: absolute;
-    top: 15%;
+    top: 19%;
     left: 93%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -271,7 +271,7 @@ html{
 
 /* BATTLE SCREEN */
 
-.battle-screen , .battle-screen2 , .battle-screen3 {
+.battle-screen , .battle-screen2 , .battle-screen3 , .battle-screen4 {
     position:fixed;
     margin:0;
     top:0;
@@ -285,7 +285,7 @@ html{
 }
 
   /* YOU MAY HAVE TO CHECK ON SECOND BATTLE IMG, I DONT  THINK THIS IS CORRECT */
-.first-battle-img , .second-battle-img , .third-battle-img{
+.first-battle-img , .second-battle-img , .third-battle-img , .fourth-battle-img{
     background-size: cover;
     width: 100%;
     height: 121.5%;
@@ -343,7 +343,7 @@ html{
     z-index: inherit;
 }
 
-.combat-log , .combat-log2 , .combat-log3 {
+.combat-log , .combat-log2 , .combat-log3 , .combat-log4{
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -685,8 +685,43 @@ html{
     z-index: -3;
 }
 
+  /* 4TH BATTLESCENE */
 
+.knight4 {
+    position: fixed;
+    margin:0;
+    top: 43.5vmin;;
+    left: 62vmin;
+    width: 10%;
+    padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
+}
 
+.knight4-attack {
+    position: fixed;
+    margin:0;
+    top: 43vmin;;
+    left: 48vmin;
+    width: 10%;
+    padding: 0;
+    width: 25%;
+}
+
+.ooze-gif {
+    position: fixed;
+    margin:0;
+    top: 23vmin;
+    left: 85vmin;
+    width: 40%;
+    padding: 0;
+    animation-name: fadeOut;
+    -webkit-animation-duration: 3s;animation-duration: 3s;
+    -webkit-animation-fill-mode: both;animation-fill-mode: both;
+    animation-play-state: paused;
+}
 
 
 

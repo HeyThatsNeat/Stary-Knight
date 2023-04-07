@@ -4,7 +4,7 @@ const enemies = [
     {name: "Stone Golem", hp: 5, turn: -1, dmg: 0, stars: 1, alive: true}, 
     {name: "Bringer of Death", hp: 5, turn: -1, dmg: 0, stars: 2, alive: true}, 
     {name: "Fire Worm", hp: 5, turn: -1, dmg: 0, stars: 3, alive: true}, 
-    {name: "enemy4", hp: 5, turn: -1, dmg: 0, stars: 4, alive: true}, 
+    {name: "Giant Ooze", hp: 5, turn: -1, dmg: 0, stars: 4, alive: true}, 
     {name: "enemy5", hp: 5, turn: -1, dmg: 0, stars: 5, alive: true}
 ]
 
@@ -15,6 +15,7 @@ const player = {hp: 50, turn: 1, get dmg() {
 const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const secondBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const thirdBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
+const fourthBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
@@ -88,6 +89,8 @@ const createSecondBattleImg = document.createElement("img")
 createSecondBattleImg.className = "second-battle-img"
 const createThirdBattleImg = document.createElement("img")
 createThirdBattleImg.className = "third-battle-img"
+const createFourthBattleImg = document.createElement("img")
+createFourthBattleImg.className = "fourth-battle-img"
 
 const restSceneGif = document.createElement("img")
 restSceneGif.className = "rest-scene-gif"
@@ -99,6 +102,8 @@ const createKnight2Img = document.createElement("img")
 createKnight2Img.className = "knight2"
 const createKnight3Img = document.createElement("img")
 createKnight3Img.className = "knight3"
+const createKnight4Img = document.createElement("img")
+createKnight4Img.className = "knight4"
 
 const createKnightAttackImg = document.createElement("img")
 createKnightAttackImg.className = "knight-attack"
@@ -106,10 +111,13 @@ const createKnight2AttackImg = document.createElement("img")
 createKnight2AttackImg.className = "knight2-attack"
 const createKnight3AttackImg = document.createElement("img")
 createKnight3AttackImg.className = "knight3-attack"
+const createKnight4AttackImg = document.createElement("img")
+createKnight4AttackImg.className = "knight4-attack"
 
 const battleScreenEl = document.querySelector(".battle-screen")
 const battleScreen2El = document.querySelector(".battle-screen2")
 const battleScreen3El = document.querySelector(".battle-screen3")
+const battleScreen4El = document.querySelector(".battle-screen4")
 
 const stoneGolemGif = document.createElement("img")
 stoneGolemGif.className = "golem"
@@ -117,6 +125,9 @@ const bringerOfDeathGif = document.createElement("img")
 bringerOfDeathGif.classList = "bringer-of-death"
 const fireWormGif = document.createElement("img")
 fireWormGif.classList = "fire-worm"
+const oozeGif = document.createElement("img")
+oozeGif.classList = "ooze-gif"
+
 
 const fightButtonEl = document.createElement("button")
 fightButtonEl.className = "fight-button"
@@ -144,6 +155,8 @@ const combatLog2El = document.createElement("div")
 combatLog2El.className = "combat-log2"
 const combatLog3El = document.createElement("div")
 combatLog3El.className = "combat-log3"
+const combatLog4El = document.createElement("div")
+combatLog4El.className = "combat-log4"
 
 const youWinMessageEl = document.createElement("h1")
 youWinMessageEl.className = "you-win-message"
@@ -209,11 +222,11 @@ const typeWriter8Animation = document.querySelector('.anim-typewriter8')
 createContinueButtonEl.addEventListener("click", disableFirstMessageScreen)
 createContinueButton2El.addEventListener("click", disableSecondMessageScreen)
 createContinueButton3El.addEventListener("click", disableThirdMessageScreen)
-// createContinueButton4El.addEventListener("click", disableCampfireScene)
+createContinueButton4El.addEventListener("click", disableCampfireScene)
 skipButtonEl.addEventListener("click", disableFirstMessageScreen)
 skipButton2El.addEventListener("click", disableSecondMessageScreen)
 skipButton3El.addEventListener("click", disableThirdMessageScreen)
-skipButton4El.addEventListener("click", campfireScene)
+skipButton4El.addEventListener("click", disableCampfireScene)
 createStartButtonEl.addEventListener("click", disableMainScreen)
 fightButtonEl.addEventListener("click", render)
 resetButtonEl.addEventListener("click", resetButton)
@@ -286,13 +299,15 @@ function enemyChoice() {
             combatLogEl.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and you have ${player.hp} HP left.<br>`
             combatLog2El.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and you have ${player.hp} HP left.<br>`
             combatLog3El.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and you have ${player.hp} HP left.<br>`
+            combatLog4El.innerHTML += `• The ${currentEnemy.name} did ${currentEnemy.dmg} damage and you have ${player.hp} HP left.<br>`
             gameOver()
         if (player.alive !== false){
             combatLogEl.innerHTML +=  `• It's your turn!<br>`
             combatLog2El.innerHTML +=  `• It's your turn!<br>`
             combatLog3El.innerHTML +=  `• It's your turn!<br>`
+            combatLog4El.innerHTML +=  `• It's your turn!<br>`
             fightButtonEl.disabled = false
-            if (firstBattleMusic.currentTime > 0.05 || secondBattleMusic.currentTime > 0.05 || thirdBattleMusic.currentTime > 0.05) {
+            if (firstBattleMusic.currentTime > 0.05 || secondBattleMusic.currentTime > 0.05 || thirdBattleMusic.currentTime > 0.05 || fourthBattleMusic.currentTime > 0.05) {
                 fightButtonEl.style.visibility = "visible"
             }
         }
@@ -311,6 +326,7 @@ function playerChoice() {
         createKnightImg.style.visibility = 'hidden'
         createKnight2Img.style.visibility = 'hidden'
         createKnight3Img.style.visibility = 'hidden'
+        createKnight4Img.style.visibility = 'hidden'
         if (firstBattleMusic.currentTime > 0.05) { 
             createKnightAttackImg.style.visibility = "visible"
         }
@@ -320,14 +336,19 @@ function playerChoice() {
         if (thirdBattleMusic.currentTime > 0.05) {
             createKnight3AttackImg.style.visibility = "visible"
         }
+        if (fourthBattleMusic.currentTime > 0.05) {
+            createKnight4AttackImg.style.visibility = "visible"
+        }
         combatLogEl.innerHTML += `• You did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
         combatLog2El.innerHTML += `• You did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
         combatLog3El.innerHTML += `• You did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
+        combatLog4El.innerHTML += `• You did ${player.dmg} damage and the ${currentEnemy.name} has ${currentEnemy.hp} HP left.<br>`
         gameOver()
         setTimeout(() => {
             createKnightAttackImg.style.visibility = "hidden"
             createKnight2AttackImg.style.visibility = "hidden"
             createKnight3AttackImg.style.visibility = "hidden"
+            createKnight4AttackImg.style.visibility = "hidden"
             if (firstBattleMusic.currentTime > 0.05) {
                 createKnightImg.style.visibility = 'visible'
             }
@@ -337,6 +358,9 @@ function playerChoice() {
             if (thirdBattleMusic.currentTime > 0.05) {
                 createKnight3Img.style.visibility = 'visible'
             }
+            if (fourthBattleMusic.currentTime > 0.05) {
+                createKnight4Img.style.visibility = 'visible'
+            }
 
         }, 1350)
     }
@@ -344,6 +368,7 @@ function playerChoice() {
         combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
         combatLog2El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
         combatLog3El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
+        combatLog4El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
     }
 }
 
@@ -382,6 +407,7 @@ function aliveStatus() {
         combatLogEl.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
         combatLog2El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
         combatLog3El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
+        combatLog4El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
     }
     return
 }
@@ -396,9 +422,11 @@ function gameOver() {
         createKnightImg.classList.add('fadeOut')
         createKnight2Img.classList.add('fadeOut')
         createKnight3Img.classList.add('fadeOut')
+        createKnight4Img.classList.add('fadeOut')
         firstBattleMusic.pause()
         secondBattleMusic.pause()
         thirdBattleMusic.pause()
+        fourthBattleMusic.pause()
         gameOverMusic.play()
         gameOverMusic.volume = 0.5
         gameOverMusic.loop = true
@@ -406,6 +434,7 @@ function gameOver() {
         combatLogEl.innerHTML += `• You have been knocked out! <br>`
         combatLog2El.innerHTML += `• You have been knocked out! <br>`
         combatLog3El.innerHTML += `• You have been knocked out! <br>`
+        combatLog4El.innerHTML += `• You have been knocked out! <br>`
     }
     console.log(currentEnemy)
 }
@@ -492,6 +521,28 @@ function checkIfWin(){
             }
         }, 3500)
     }
+    if(currentEnemy.alive === false && currentEnemy.stars === 0 && fourthBattleMusic.currentTime > 0.05) {
+        setTimeout(() => {
+            oozeGif.classList.add('fadeOut')
+        }, 1200)
+        // YOU MIGHT HAVE TO MAKE A 2ND FIGHT BUTTON IF THIS ONE IS GIVING YOU PROBLEMS
+        fightButtonEl.style.visibility = "hidden"
+
+        setTimeout(() => {
+            if (fourthBattleMusic.currentTime > 0.05) {
+                createKnight4Img.style.visibility = "visible"
+                winningTheme.play()
+                winningTheme.volume = 0.08
+                fourthBattleMusic.pause()
+                fourthBattleMusic.currentTime = 0
+                battleScreen4El.append(youWinMessageEl)
+                youWinMessageEl.style.visibility = "visible"
+                battleScreen4El.style.visibility = "visible"
+                battleScreen4El.append(forward4ButtonEl)
+                forward4ButtonEl.style.visibility = "visible"
+            }
+        }, 3500)
+    }
     return 
 }
 
@@ -506,6 +557,7 @@ function toggleMuted1() {
     firstMessageScreenMusic.muted = !firstMessageScreenMusic.muted
     secondBattleMusic.muted = !secondBattleMusic.muted
     thirdBattleMusic.muted = !thirdBattleMusic.muted
+    fourthBattleMusic.muted = !fourthBattleMusic.muted
     secondMessageScreenMusic.muted = !secondMessageScreenMusic.muted
     thirdMessageScreenMusic.muted = ! thirdMessageScreenMusic.muted 
     campfireMusic.muted = !campfireMusic.muted
@@ -525,6 +577,9 @@ function resetButton() {
 
     thirdBattleMusic.pause()
     thirdBattleMusic.currentTime = 0
+
+    fourthBattleMusic.pause()
+    fourthBattleMusic.currentTime = 0
 
     winningTheme.pause()
     winningTheme.currentTime = 0
@@ -551,6 +606,7 @@ function resetButton() {
     firstMessageScreenEl.style.display = 'flex'
     secondMessageScreenEl.style.display = 'flex'
     thirdMessageScreenEl.style.display = 'flex'
+    campfireSceneEl.style.display = 'flex'
     battleScreenEl.style.display = 'inline'
     battleScreen2El.style.display = 'inline'
     battleScreen3El.style.display = 'inline'
@@ -577,14 +633,17 @@ function resetButton() {
     createKnightImg.style.visibility = 'hidden'
     createKnight2Img.style.visibility = 'hidden'
     createKnight3Img.style.visibility = 'hidden'
+    createKnight4Img.style.visibility = 'hidden'
 
     createKnightAttackImg.style.visibility = 'hidden'
     createKnight2AttackImg.style.visibility = 'hidden'
     createKnight3AttackImg.style.visibility = 'hidden'
+    createKnight4AttackImg.style.visibility = 'hidden'
 
     stoneGolemGif.style.visibility = 'hidden'
     bringerOfDeathGif.style.visibility = 'hidden'
     fireWormGif.style.visibility = 'hidden'
+    oozeGif.style.visibility = 'hidden'
 
     restSceneGif.style.visibility = 'hidden'
 
@@ -596,7 +655,9 @@ function resetButton() {
     combatLog2El.style.visibility = 'hidden'
     combatLog2El.innerHTML = ""
     combatLog3El.style.visibility = 'hidden'
+    combatLog4El.style.visibility = 'hidden'
     combatLog3El.innerHTML = ""
+    combatLog4El.innerHTML = ""
     
     youWinMessageEl.style.visibility = "hidden"
 
@@ -609,9 +670,12 @@ function resetButton() {
     createKnightImg.classList.remove('fadeOut')
     createKnight2Img.classList.remove('fadeOut')
     createKnight3Img.classList.remove('fadeOut')
+    createKnight4Img.classList.remove('fadeOut')
+
     stoneGolemGif.classList.remove('fadeOut')
     bringerOfDeathGif.classList.remove('fadeOut')
     fireWormGif.classList.remove('fadeOut')
+    oozeGif.classList.remove('fadeOut')
     
     gameOverOff()
     
@@ -873,34 +937,21 @@ function disableThirdMessageScreen(evnt) {
 
 //  DISABLE THIRD BATTLE SCREEN
 function campfireScene(evnt) {
-    // battleScreen2El.style.display = "none"
     battleScreen3El.style.display = "none"
-    // updateEnemy()
     updateEnemy()
-    // console.log(currentEnemy)
     console.log(currentEnemy)
-    // secondBattleMusic.pause()
     thirdBattleMusic.pause()
-    // secondBattleMusic.currentTime = 0
     thirdBattleMusic.currentTime = 0
     restSceneGif.src='../css/rest-scene.gif'
     restSceneGif.style.visibility = "visible"
     campfireSceneEl.append(restSceneGif)
-    // thirdMessageScreenEl.classList.add('play-animation3')
     campfireSceneEl.classList.add('play-animation4')
-    // resetThirdAnimationScreen()
     resetFourthAnimationScreen()
-
-    // thirdMessageScreenEl.append(skipButton3El)
     campfireSceneEl.append(skipButton4El)
-    // skipButton3El.style.visibility = 'visible'
     skipButton4El.style.visibility = 'visible'
     console.log("SKIP BUTTON 4 VISIBILITY AT THE END",skipButton4El.style.visibility)
-    // thirdMessageScreenEl.append(resetButtonEl)
     campfireSceneEl.append(resetButtonEl)
-    // resetButtonEl.style.visibility = 'visible'
     resetButtonEl.style.visibility - 'visible'
-    // thirdMessageScreenEl.append(muteButton2El)
     campfireSceneEl.append(muteButton1El)
     muteButton1El.style.visibility = 'visible'
     emptySilenceMusic.play()
@@ -914,7 +965,6 @@ function campfireScene(evnt) {
             console.log(player)
         }
     })
-    // thirdMessageScreenMusic.play()
     campfireMusic.play()
     campfireMusic.volume = 0.5
     campfireMusic.loop = true
@@ -924,9 +974,39 @@ function campfireScene(evnt) {
     evnt.stopPropagation()
 }
 
+function disableCampfireScene(evnt) {
+    // thirdMessageScreenEl.style.display = 'none'
+    campfireSceneEl.style.display = 'none'
+    createFourthBattleImg.src="../css/skull_cave_by_misssaber444_deb8jki (1).jpg"
+    battleScreen4El.append(createFourthBattleImg)
+    createFourthBattleImg.style.visibility = 'visible'
+    createKnight4Img.src="../css/knight-animation.gif"
+    createKnight4AttackImg.src="../css/knight-attack.gif"
+    battleScreen4El.append(createKnight4Img)
+    battleScreen4El.append(createKnight4AttackImg)
+    createKnight4Img.style.visibility = 'visible'
+    createKnight4AttackImg.style.visibility = "hidden"
+    oozeGif.src="../css/ooze.gif"
+    battleScreen4El.append(oozeGif)
+    oozeGif.style.visibility = 'visible'
+    battleScreen4El.append(fightButtonEl)
+    fightButtonEl.style.visibility = 'visible'
+    fourthBattleMusic.volume = 0.04
+    fourthBattleMusic.play()
+    fourthBattleMusic.loop = true
+    battleScreen4El.append(combatLog4El)
+    combatLog4El.innerHTML = ""
+    combatLog4El.style.visibility = 'visible'
+    battleScreen4El.append(resetButtonEl)
+    resetButtonEl.style.visibility = 'visible'
+    battleScreen4El.append(muteButton1El)
+    campfireMusic.pause()
+    campfireMusic.currentTime = 0
+    evnt.stopPropagation()
+}
+
 console.log(enemies)
 console.log(player)
-//   campfire scene next!!! 
 //to be implemented
 //toggle button doesnt keep everything turned on after you hit it to play music onload
 // DONT FORGET TO ADD STARS GIF TO THE GAME
