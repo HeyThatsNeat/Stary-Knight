@@ -16,7 +16,7 @@ const firstBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_
 const secondBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const thirdBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
 const fourthBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
-const fifthBattleMusic = new Audio("../css/audio/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3")
+const fifthBattleMusic = new Audio("../css/audio/2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.mp3")
 
 const winningTheme = new Audio("../css/audio/stinger-2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3")
 
@@ -172,14 +172,25 @@ youWinMessageEl.innerText = `Congratulations! You  get  your  stars  back!`
 
 const gameOverScreenEl = document.createElement("div")
 gameOverScreenEl.id = "overlay"
+const youWonTheGameScreenEl = document.createElement("div")
+youWonTheGameScreenEl.id = "win-overlay"
+const treasureRoomImg = document.createElement("img")
+treasureRoomImg.className = "treasure-room"
+treasureRoomImg.src="../css/pictures/Gold Treasures room.jpg"
+youWonTheGameScreenEl.append(treasureRoomImg)
 
 const gameOverMessageEl = document.createElement("p")
 gameOverMessageEl.className = "game-over-message"
 gameOverMessageEl.innerHTML = "GAME <br>OVER"
 gameOverScreenEl.append(gameOverMessageEl)
+const youWonTheGameMessageEl = document.createElement("p")
+youWonTheGameMessageEl.className = "win-over-message"
+youWonTheGameMessageEl.innerHTML = "YOU <br>WIN"
+youWonTheGameScreenEl.append(youWonTheGameMessageEl)
 
 const bodyEl = document.querySelector("body")
 bodyEl.appendChild(gameOverScreenEl)
+bodyEl.appendChild(youWonTheGameScreenEl)
 
 const resetButtonEl = document.createElement('button')
 resetButtonEl.className = "reset-button"
@@ -200,10 +211,16 @@ muteButton2El.innerText = "Toggle Sound"
 const gameoverMuteButtonEl = document.createElement("button")
 gameoverMuteButtonEl.className = "game-over-mute-button"
 gameoverMuteButtonEl.innerText = "Toggle Mute"
+const gameoverMuteButton2El = document.createElement("button")
+gameoverMuteButton2El.className = "game-over-mute-button2"
+gameoverMuteButton2El.innerText = "Toggle Mute"
 
 const gameOverResetButtonEl = document.createElement("button")
 gameOverResetButtonEl.className = "game-over-reset-button"
 gameOverResetButtonEl.innerText = "Try Again?"
+const gameOverResetButton2El = document.createElement("button")
+gameOverResetButton2El.className = "game-over-reset-button2"
+gameOverResetButton2El.innerText = "Try Again?"
 
 const forward1ButtonEl = document.createElement("button")
 forward1ButtonEl.className = "forward1-button"
@@ -245,9 +262,11 @@ fightButtonEl.addEventListener("click", render)
 resetButtonEl.addEventListener("click", resetButton)
 resetButton2El.addEventListener("click", resetButton)
 gameOverResetButtonEl.addEventListener("click", resetButton)
+gameOverResetButton2El.addEventListener("click", resetButton)
 muteButton1El.addEventListener("click", toggleMuted1)
 muteButton2El.addEventListener("click", toggleMuted1)
 gameoverMuteButtonEl.addEventListener("click", toggleMuted1)
+gameoverMuteButton2El.addEventListener("click", toggleMuted1)
 forward1ButtonEl.addEventListener("click", disableFirstBattleScreen)
 forward2ButtonEl.addEventListener("click", disableSecondBattleScreen)
 forward3ButtonEl.addEventListener("click", campfireScene)
@@ -273,6 +292,7 @@ function render() {
     aliveStatus()
     knightStars()
     checkIfWin()
+    beatTheGame()
     return
 }
 
@@ -374,17 +394,17 @@ function playerChoice() {
         }, 1350)
     }
     if (player.alive !== false) {
-        combatLogEl.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
-        combatLog2El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
-        combatLog3El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
-        combatLog4El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
-        combatLog5El.innerHTML += `• It's ${currentEnemy.name} turn!<br>`
+        combatLogEl.innerHTML += `• It's ${currentEnemy.name}'s turn!<br>`
+        combatLog2El.innerHTML += `• It's ${currentEnemy.name}'s turn!<br>`
+        combatLog3El.innerHTML += `• It's ${currentEnemy.name}'s turn!<br>`
+        combatLog4El.innerHTML += `• It's ${currentEnemy.name}'s turn!<br>`
+        combatLog5El.innerHTML += `• It's ${currentEnemy.name}'s turn!<br>`
     }
 }
 
 // IN ENEMY OBJECTS
 function currentEnemyDamage() {
-    currentEnemy.dmg = Math.floor(Math.random() * 4)
+    currentEnemy.dmg = Math.floor(Math.random() * 2)
 }
 
 // IN PLAYER OBJECT
@@ -412,11 +432,11 @@ function switchCharacterTurns() {
 function aliveStatus() {
     if (currentEnemy.hp <= 0) {
         currentEnemy.alive = false
-        combatLogEl.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
-        combatLog2El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
-        combatLog3El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
-        combatLog4El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
-        combatLog5El.innerHTML += `• ${currentEnemy.name} is dead!!!<br>`
+        combatLogEl.innerHTML += `• The ${currentEnemy.name} is dead!!!<br>`
+        combatLog2El.innerHTML += `• The ${currentEnemy.name} is dead!!!<br>`
+        combatLog3El.innerHTML += `• The ${currentEnemy.name} is dead!!!<br>`
+        combatLog4El.innerHTML += `• The ${currentEnemy.name} is dead!!!<br>`
+        combatLog5El.innerHTML += `• The ${currentEnemy.name} is dead!!!<br>`
     }
     return
 }
@@ -449,15 +469,20 @@ function gameOver() {
 }
 
 function gameOverOn() {
-    gameOverScreenEl.style.display = "block";
+    gameOverScreenEl.style.display = "block"
     gameOverScreenEl.style.visibility = 'visible'
     gameOverScreenEl.style.zIndex = 5
     gameOverMessageEl.classList.add('play-game-over-animation')
 }
 
 function gameOverOff() {
-    gameOverScreenEl.style.display = "none";
+    gameOverScreenEl.style.display = "none"
     gameOverScreenEl.style.zIndex = -10
+}
+
+function youBeatTheGameOff() {
+    youWonTheGameScreenEl.style.display = "none"
+    youWonTheGameScreenEl.style.zIndex = -10
 }
 
 function checkIfWin(){
@@ -578,7 +603,13 @@ function checkIfWin(){
 
 function beatTheGame() {
     if (enemies[4].alive === false) {
-        return player.win = true
+        player.win = true
+    setTimeout(() => {
+        youWonTheGameScreenEl.style.display = "block"
+        youWonTheGameScreenEl.style.visibility = 'visible'
+        youWonTheGameScreenEl.style.zIndex = 5
+        youWonTheGameMessageEl.classList.add('play-game-over-animation')
+    }, 8000)
     }
 }
 
@@ -731,6 +762,8 @@ function resetButton() {
     bossGif.classList.remove('fadeOut')
     
     gameOverOff()
+
+    youBeatTheGameOff()
     
     for (let i = 0; i < enemies.length; i++) {
         enemies[i].stars = i + 1  
@@ -865,6 +898,9 @@ function disableFirstMessageScreen(evnt) {
 // GAME OVER SCREEN
 gameOverScreenEl.append(gameoverMuteButtonEl)
 gameOverScreenEl.append(gameOverResetButtonEl)
+
+youWonTheGameScreenEl.append(gameoverMuteButton2El)
+youWonTheGameScreenEl.append(gameOverResetButton2El)
 
 // HAPPENING ON CLICK AND SWITCHES OVER TO 2ND MESSAGE SCREEN
 function disableFirstBattleScreen(evnt) {
@@ -1063,7 +1099,6 @@ function disableFourthBattleScreen(evnt) {
     })
     fifthMessageScreenMusic.play()
     fifthMessageScreenMusic.volume = 0.5
-    fifthMessageScreenMusic.loop = true
     winningTheme.pause()
     winningTheme.currentTime = 0
     combatLog4El.innerHTML = ""
