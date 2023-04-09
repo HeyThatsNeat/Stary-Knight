@@ -514,7 +514,7 @@ function gameOver() {
         fourthBattleMusic.pause()
         fifthBattleMusic.pause()
         gameOverMusic.play()
-        gameOverMusic.volume = 0.5
+        gameOverMusic.volume = 0.15
         gameOverMusic.loop = true
         player.alive = false
         combatLogEl.innerHTML += `• You have been knocked out! <br>`
