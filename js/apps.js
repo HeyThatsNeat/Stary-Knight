@@ -955,7 +955,6 @@ function startGameMenu() {
     startScreenEl.append(menuTitleEl)
     startScreenEl.append(muteButton1El)
     muteButton1El.style.visibility = 'visible'
-    return playMainMenu()
 }
 
 // HAPPENING ON CLICK & SWITCHES TO THE FIRST MESSAGE SCREEN
