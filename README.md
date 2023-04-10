@@ -21,6 +21,9 @@ Starry Knight is about a Knight who has lost all their stars to the forces of ev
 ## Coming Soon
 * More options to fight and interact in the battle.
 * A longer storyline.
-* Animations, animations, and more animations!
+* Animations, animations, and more animations! (including enemy attack animations)
 * Mobile responsiveness.
-* Enemy attack animations.
+* HP bars.
+* Reset health on campfire.
+* Tweak damage and hp points to find a fine balance.
+* More personalized win message.
